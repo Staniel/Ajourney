@@ -1,4 +1,4 @@
 from django.contrib import admin
-from travelplans.models import User
+from travelplans.models import Plan
 # Register your models here.
-admin.site.register(User)
+admin.site.register(Plan)
