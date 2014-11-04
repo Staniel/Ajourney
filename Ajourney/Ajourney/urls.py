@@ -5,6 +5,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'Ajourney.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
+    url(r'^travelplans/', include('travelplans.urls', namespace="travelplans")),
     url(r'^admin/', include(admin.site.urls)),
+
 )
