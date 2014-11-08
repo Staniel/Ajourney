@@ -43,7 +43,7 @@
         <div class="panel-heading">{{list_title}}</div>
 
             {% if plan_list.0 %}
-            <table class="table table-striped">
+            <table id="plantable" class="table table-striped">
                 <tr>
                     <td>Destination</td>
                     <td>Depart Time</td>
@@ -53,12 +53,12 @@
                 </tr>
                 
                 {% for plan in plan_list %}
-                <tr>
-                    <td>{{ plan.destination }}</td>
-                    <td>{{ plan.depart_time }}</td>
-                    <td>{{ plan.return_time}}</td>
-                    <td>{{ plan.description }}</td>
-                    <td>{{ plan.holder }}</td>
+                <tr class="plan_tr">
+                    <td class="plan_dest">{{ plan.destination }}</td>
+                    <td class="plan_dep">{{ plan.depart_time }}</td>
+                    <td class="plan_ret">{{ plan.return_time}}</td>
+                    <td class="plan_description">{{ plan.description }}</td>
+                    <td class="plan_holder">{{ plan.holder }}</td>
                 </tr>
                 {% endfor %}
             </table>

@@ -33,7 +33,6 @@ def my_plans(request):
 
 def joined_plans(request):
     plan_list=get_all_plans()
-    
     template = loader.get_template('travelplans/planlist.html')
     context = RequestContext(request, {
         'plan_list': plan_list,
