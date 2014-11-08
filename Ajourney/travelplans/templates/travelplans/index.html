@@ -1,2 +1,62 @@
-hello world 
-{{ test }}
+{% load staticfiles %}
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://getbootstrap.com/examples/jumbotron-narrow/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>AJourney</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'travelplans/style.css' %}" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <nav class="navbar navbar-custom">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">AJourney</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active "><a href="">All plans</a></li>
+              <li><a href="">My plans</a></li>
+              <li><a href="">Joined plans</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="">Logout </a></li> 
+              <li><a href=""></a></li>  
+            </ul>
+            
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+      <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+      <div class="footer">
+        <p>© Copyright 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
