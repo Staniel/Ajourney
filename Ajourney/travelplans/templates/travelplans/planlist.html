@@ -41,6 +41,9 @@
    
     </div>
     <div class="col-md-10">
+         <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </button>
+         <br/>
+         <br/>
     <div class="panel panel-info">
         <!-- Default panel contents -->
         <div class="panel-heading">All Available Plans</div>
@@ -70,6 +73,44 @@
             {% endif %}
     </div>
     </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="createNewPlanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create New Plan</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+            <div class="form-group">
+                <label for="newdestination">Destination</label>
+                <input type="text" class="form-control" id="newdestination" placeholder="Enter Destination">
+            </div>
+            <div class="form-group">
+                <label for="newdepart">Depart Time</label>
+                <input type="date" class="form-control" id="newdepart" placeholder="Depart Time">
+            </div>
+            <div class="form-group">
+                <label for="newreturn">Return Time</label>
+                <input type="date" class="form-control" id="newreturn" placeholder="Return Time">
+            </div>
+            <div class="form-group">
+                <label for="newdescription">Description</label>
+                <textarea class="form-control" id="newdescription" placeholder="Enter Description" row="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="newlimit">Max Travellers</label>
+                <input type="number" class="form-control" id="newlimit" placeholder="Enter Max Number of Travellers">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
   </body>
 </html>

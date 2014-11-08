@@ -23,8 +23,8 @@
   <body>
 
     <div  class="container-fluid">
-      <nav class="navbar navbar-custom">
-        <div class="container">
+      <nav class="row navbar navbar-custom">
+        <div>
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
@@ -48,14 +48,12 @@
           </div><!--/.nav-collapse -->
         </div>
       </nav>
-      <div id="content">
+      <div class="row" id="content">
         {% block content %}{% endblock %}
     </div>
-
-
-
-
-      <div class="footer">
+    <br/>
+    <br/>
+      <div class="row footer">
         <p>© Copyright 2014</p>
       </div>
 
