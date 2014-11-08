@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from travelplans.views import view_plans,manipulate_plans,join_plan,share_plan
+from travelplans.views import view_plans,manipulate_plans,join_plan,share_plan, views
 
 
 urlpatterns = patterns('',
@@ -16,4 +16,5 @@ urlpatterns = patterns('',
 
     url(r'^join_plan$', join_plan.join_plan, name='join_plan'),
     url(r'^share_plan$', share_plan.share_plan, name='share_plan'),
+    url(r'^index$', views.index, name='index'),
 )
