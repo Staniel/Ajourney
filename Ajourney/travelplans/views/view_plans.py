@@ -7,7 +7,7 @@ def view_my_plans(request):
 
 def view_available_plans(request):
 	plan_list=get_all_plans()
-	template = loader.get_template('travelplans/planlist.html')
+	template = loader.get_template('travelplans/view_plans.html')
 	context = RequestContext(request, {
         'plan_list': plan_list,
     })
