@@ -1,13 +1,6 @@
-{% if plan_list.0 %}
-    <ul>
-    {% for plan in plan_list %}
-        <li>{{ plan.holder }}</li>
-        <li>{{ plan.destination }}</li>
-        <li>{{ plan.depart_time }}</li>
-        <li>{{ plan.return_time}}</li>
-        <li>{{ plan.description }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No plans are available.</p>
-{% endif %}
+{% extends index.html %}
+
+{% block %}
+
+
+{% endblock %}
