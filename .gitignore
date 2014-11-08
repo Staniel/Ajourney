@@ -1,3 +1,6 @@
 *.pyc
 .DS_Store
 Ajourney/*.pyc
+travelplans/*.pyc
+travelplans/views/*.pyc
+travelplans/migrations/*.pyc
