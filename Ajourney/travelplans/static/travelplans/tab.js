@@ -1,11 +1,18 @@
 $(document).ready(function(){
     $('#allplan').click(function(){
-       alert(1);
+       $.get('/travelplans/view_available_plans', function(data){
+         $("#updatecontent").html(data);
+        });
     });
     $('#myplan').click(function(){
-       alert(2);
+       $.get('/travelplans/view_my_plans', function(data){
+         $("#updatecontent").html(data);
+        });
     });
     $('#jplan').click(function(){
-       alert(3);
+       $.get('/travelplans/view_joined_plans', function(data){
+         $("#updatecontent").html(data);
+        });
+
     });    
 });
