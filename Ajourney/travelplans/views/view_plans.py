@@ -14,7 +14,17 @@ def view_available_plans(request):
 	return HttpResponse(template.render(context))
 
 def view_joined_plans(request):
-    return HttpResponse("joined plans")
+    plan_list=get_all_plans()
+    template = loader.get_template('travelplans/view_plans.html')
+    context = RequestContext(request, {
+        'plan_list': plan_list,
+    })
+    return HttpResponse(template.render(context))
 
 def view_plan_detail(request):
-    return HttpResponse("plan detail")
+    plan_list=get_all_plans()
+    template = loader.get_template('travelplans/view_plans.html')
+    context = RequestContext(request, {
+        'plan_list': plan_list,
+    })
+    return HttpResponse(template.render(context))
