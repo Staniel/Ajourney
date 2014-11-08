@@ -16,7 +16,8 @@
   <body>
     <div class="col-md-2">
         <h3><span>Filters</span></h3>
-        <form role="form">
+        <form role="form" class="search">
+            <!-- here need to deal with parameter of user -->
             <div class="form-group">
                 <label for="destinationfilter">Destination</label>
                 <input type="text" class="form-control" id="destinationfilter" placeholder="Enter Destination">
@@ -29,7 +30,7 @@
                 <label for="returnfilter">Return Time</label>
                 <input type="date" class="form-control" id="returnfilter" placeholder="Return Time">
             </div>
-            <button type="submit" class="btn btn-primary">Search Plans</button>
+            <button id="searchbutton" type="submit" class="btn btn-primary">Search Plans</button>
         </form>
    
     </div>

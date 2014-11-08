@@ -71,26 +71,27 @@
         <h4 class="modal-title" id="myModalLabel">Create New Plan</h4>
       </div>
       <div class="modal-body">
-        <form role="form">
+        <form role="form" action="{% url 'travelplans:create_plan' %}" method="post">
+        {% csrf_token %}
             <div class="form-group">
                 <label for="newdestination">Destination</label>
-                <input type="text" class="form-control" id="newdestination" placeholder="Enter Destination">
+                <input type="text" name="destination" class="form-control" id="newdestination" placeholder="Enter Destination">
             </div>
             <div class="form-group">
                 <label for="newdepart">Depart Time</label>
-                <input type="date" class="form-control" id="newdepart" placeholder="Depart Time">
+                <input type="date" name="departtime" class="form-control" id="newdepart" placeholder="Depart Time">
             </div>
             <div class="form-group">
                 <label for="newreturn">Return Time</label>
-                <input type="date" class="form-control" id="newreturn" placeholder="Return Time">
+                <input type="date" name="returntime" class="form-control" id="newreturn" placeholder="Return Time">
             </div>
             <div class="form-group">
                 <label for="newdescription">Description</label>
-                <textarea class="form-control" id="newdescription" placeholder="Enter Description" row="3"></textarea>
+                <textarea class="form-control" name="description" id="newdescription" placeholder="Enter Description" row="3"></textarea>
             </div>
             <div class="form-group">
                 <label for="newlimit">Max Travellers</label>
-                <input type="number" class="form-control" id="newlimit" placeholder="Enter Max Number of Travellers">
+                <input type="number" name="limit" class="form-control" id="newlimit" placeholder="Enter Max Number of Travellers">
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
