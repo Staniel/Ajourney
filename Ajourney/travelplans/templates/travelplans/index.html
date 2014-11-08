@@ -18,6 +18,7 @@
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'travelplans/style.css' %}" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'travelplans/tab.js' %}"></script>
   </head>
 
   <body>
@@ -35,16 +36,15 @@
             <a class="navbar-brand" href="">AJourney</a>
           </div>
           <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active "><a href="">All plans</a></li>
-              <li><a href="">My plans</a></li>
-              <li><a href="">Joined plans</a></li>
+            <ul id="plantab" class="nav navbar-nav">
+              <li id="allplan" class="active "><a href="">All plans</a></li>
+              <li id="myplan"><a href="">My plans</a></li>
+              <li id="jplan"><a href="">Joined plans</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="">Logout </a></li> 
               <li><a href=""></a></li>  
             </ul>
-            
           </div><!--/.nav-collapse -->
         </div>
       </nav>
