@@ -9,7 +9,7 @@ class Plan(models.Model):
 	depart_time = models.DateTimeField()
 	return_time = models.DateTimeField()
 	def __str__(self):
-		return self.description
+		return self.destination+'.'+self.description
 class JoinedPlan(models.Model):
 	joined_user = models.ForeignKey(User)
 	joined_plan = models.ForeignKey(Plan)
