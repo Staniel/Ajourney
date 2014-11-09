@@ -55,8 +55,8 @@
                 {% for plan in plan_list %}
                 <tr class="plan_tr">
                     <td class="plan_dest">{{ plan.destination }}</td>
-                    <td class="plan_dep">{{ plan.depart_time }}</td>
-                    <td class="plan_ret">{{ plan.return_time}}</td>
+                    <td class="plan_dep">{{ plan.depart_time | date:"m-d-Y" }}</td>
+                    <td class="plan_ret">{{ plan.return_time | date:"m-d-Y"}}</td>
                     <td class="plan_description">{{ plan.description }}</td>
                     <td class="plan_holder">{{ plan.holder }}</td>
                 </tr>
