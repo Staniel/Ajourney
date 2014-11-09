@@ -17,6 +17,9 @@ def create_plan(request, user_id=1):
     new_plan.depart_time = request.POST.get('departtime', datetime.today())
     new_plan.return_time = request.POST.get('returntime', datetime.today())
     new_plan.limit = request.POST.get('limit', 2)
+    #avoid exception page, will be refactored later
+    if not isinstance(new_plan.limit, int) or new_plan.limit <= 1:
+        new_plan.limit = 2
     new_plan.save()
     plan_list=get_all_plans()
     template = loader.get_template('travelplans/view_plans.html')
