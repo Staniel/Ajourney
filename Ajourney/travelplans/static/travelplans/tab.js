@@ -32,7 +32,7 @@ $(document).ready(function(){
             if (dest != '')
             {
                 var test_dest = $(this).find('.plan_dest').html().toLowerCase();
-                if (test_dest != dest)
+                if (test_dest.indexOf(dest) <= -1)
                 {
                     $(this).hide();
                     return true;
