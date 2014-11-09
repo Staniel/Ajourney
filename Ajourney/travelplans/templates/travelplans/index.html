@@ -12,6 +12,7 @@
      <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 
+
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
 
@@ -19,6 +20,7 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
 
     <title>AJourney</title>
 
@@ -48,7 +50,7 @@
               <li id="createplan"><a href="#" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="">Logout </a></li> 
+              <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout </a></li> 
               <li><a href=""></a></li>  
             </ul>
           </div><!--/.nav-collapse -->
@@ -69,7 +71,7 @@
         <h4 class="modal-title" id="myModalLabel">Create New Plan</h4>
       </div>
       <div class="modal-body">
-        <form role="form" action="{% url 'travelplans:create_plan' %}" method="post">
+        <form id="createform" role="form" action="{% url 'travelplans:create_plan' %}" method="post">
         {% csrf_token %}
             <div class="form-group">
                 <label for="newdestination">Destination</label>
@@ -91,7 +93,7 @@
                 <label for="newlimit">Max Travellers</label>
                 <input type="number" name="limit" class="form-control" id="newlimit" placeholder="Enter Max Number of Travellers">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button id="createbutton" type="submit" class="btn btn-primary">Create</button>
         </form>
       </div>
     </div>

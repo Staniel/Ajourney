@@ -1,5 +1,44 @@
-$(document).ready(function(){
 
+$(document).ready(function(){
+    $.validator.addMethod("greaterThan", 
+    function(value, element, params) {
+        if (!/Invalid|NaN/.test(new Date(value))) {
+            return new Date(value) > new Date($(params).val());
+        }
+        return isNaN(value) && isNaN($(params).val()) 
+            || (Number(value) > Number($(params).val())); 
+    },'return time must be greater than depart time.');
+    $('#createform').validate({
+    rules: {
+        destination: {
+            required: true
+        },
+        departtime: {
+            required: true,
+        },
+        returntime: {
+            required: true,
+            greaterThan: "#newdepart"
+        },
+        limit:{
+            required: true,
+            min: 2,
+            digits: true
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    errorClass: 'help-block',
+    success: function (element) {
+        element.text('OK!').addClass('valid')
+            .closest('.form-group').removeClass('has-error').addClass('has-success');
+    }
+});
+    // $('#createbutton').click(function(e){
+    //     e.preventDefault();
+
+    // });
     $('#allplan').click(function(e){
         e.preventDefault();
        $.get('/travelplans/available_plans', function(data){
@@ -28,50 +67,40 @@ $(document).ready(function(){
         // console.log(depart);
         // console.log(ret);
         $('#plantable .plan_tr').each(function(){
+            $(this).show();
             if (dest != '')
             {
                 var test_dest = $(this).find('.plan_dest').html().toLowerCase();
-                if (test_dest != dest)
+                if (test_dest.indexOf(dest) <= -1)
                 {
                     $(this).hide();
                 }
-                else
-                {
-                    $(this).show();
-                }
+                    return true;
+                }    
             }
-        })
-        $('#plantable .plan_tr').each(function(){
             if (depart != '')
             {
-                var test_depart = $(this).find('.plan_dep').html();
                 var filter_date = new Date(depart);
-                var this_date = new Date(test_depart);
-                console.log(filter_date);
-                console.log(test_depart);
-                // remove if the plan depart before the filter time
+                var test_depart = $(this).find('.plan_dep').html();
+                var arr = test_depart.split("-");
+                var this_date = new Date(arr[2], arr[0]-1, arr[1]);
+
                 if (this_date < filter_date)
                 {
                     $(this).hide();
-                }
-                else
-                {
-                    $(this).show();
+                    return true;
                 }
             }
-        })
-        $('#plantable .plan_tr').each(function(){
             if (ret != '')
             {
-                var test_ret = $(this).find('.plan_ret').html();
-                // remove if the plan return after the filter time
-                if (new Date(test_ret) > new Date(ret))
+                var filter_date = new Date(ret);
+                var test_return = $(this).find('.plan_ret').html();
+                var arr = test_return.split("-");
+                var this_date = new Date(arr[2], arr[0]-1, arr[1]);
+                if (this_date > filter_date)
                 {
                     $(this).hide();
-                }
-                else
-                {
-                    $(this).show();
+                    return true;
                 }
             }
         })

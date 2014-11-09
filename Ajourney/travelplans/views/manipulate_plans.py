@@ -16,7 +16,7 @@ def create_plan(request, user_id=1):
     new_plan.description = request.POST.get('description', "nonedescript")
     new_plan.depart_time = request.POST.get('departtime', datetime.today())
     new_plan.return_time = request.POST.get('returntime', datetime.today())
-    new_plan.limit = request.POST.get('limit', 3)
+    new_plan.limit = request.POST.get('limit', 2)
     new_plan.save()
     # new_joined_plan = JoinedPlan()
     # new_joined_plan.joined_user = user_id

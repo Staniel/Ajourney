@@ -13,7 +13,7 @@ class Plan(models.Model):
 	def get_holder(self):
 		return self.holder
 class JoinedPlan(models.Model):
-	joined_user = models.ForeignKey(User)
+	#joined_user = models.ForeignKey(User)
 	joined_plan = models.ForeignKey(Plan)
 	def __str__(self):
 		return self.joined_user.__str__()+" join "+self.joined_plan.__str__()
