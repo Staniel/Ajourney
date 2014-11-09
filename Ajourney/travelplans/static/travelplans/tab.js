@@ -64,8 +64,6 @@ $(document).ready(function(){
         var dest = $('#destinationfilter').val().toLowerCase();
         var depart = $('#departfilter').val();
         var ret = $('#returnfilter').val();
-        // console.log(depart);
-        // console.log(ret);
         $('#plantable .plan_tr').each(function(){
             $(this).show();
             if (dest != '')
@@ -75,8 +73,7 @@ $(document).ready(function(){
                 {
                     $(this).hide();
                 }
-                    return true;
-                }    
+                    return true;   
             }
             if (depart != '')
             {

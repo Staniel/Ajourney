@@ -50,6 +50,7 @@
                     <td>Return Time</td>
                     <td>Description</td>
                     <td>Holder</td>
+                    <td>Max Traveller</td>
                 </tr>
                 
                 {% for plan in plan_list %}
@@ -59,6 +60,7 @@
                     <td class="plan_ret">{{ plan.return_time | date:"m-d-Y"}}</td>
                     <td class="plan_description">{{ plan.description }}</td>
                     <td class="plan_holder">{{ plan.holder }}</td>
+                    <td class="plan_limit">{{plan.limit}}</td>
                 </tr>
                 {% endfor %}
             </table>
