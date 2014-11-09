@@ -106,7 +106,9 @@
   <p>
      <!--Hello {{ user.get_full_name|default:user.username }}!
      Your ID is {{user.id}}!-->
-     Your name is {{currentuser.name}}
-     Your facebook ID is {{currentuser.id}}  </p>
-
+     {{currentuser.name}}
+  </p>
+  <p>
+     {{currentuser.id}}  
+  </p>
 </html>
