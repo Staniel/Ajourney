@@ -22,7 +22,8 @@ $(document).ready(function(){
         },
         limit:{
             required: true,
-            min: 2
+            min: 2,
+            digits: true
         }
     },
     highlight: function (element) {
