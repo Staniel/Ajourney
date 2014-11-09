@@ -1,7 +1,11 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
+<<<<<<< HEAD
+=======
+from travelplans.plan_manager import get_all_plans
+>>>>>>> f5292053eb7077b5484abe7129e20f7eebef76b5
 from travelplans.models import User
 from django.contrib.auth import login,authenticate
 import facebook
@@ -41,6 +45,10 @@ def home(request):
             graph = facebook.GraphAPI(social_user.extra_data['access_token'])
             profile = graph.get_object("me")
             currentuser = FBuser(profile['id'],profile['name'])
+#            plan_list=get_all_plans()
+#            context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends, 'currentuser': currentuser, 'plan_list': plan_list, 'list_title':'All available plans' })
+#            return render_to_response('travelplans/view_plans.html',context_instance=context)
+            #return redirect('/travelplans')
             user_name=currentuser.name.split()
             facebookid=currentuser.id
             currentuser=User.objects.filter(username__exact=facebookid)
