@@ -33,7 +33,11 @@ $(document).ready(function(){
                 var test_dest = $(this).find('.plan_dest').html().toLowerCase();
                 if (test_dest != dest)
                 {
-                    $(this.remove());
+                    $(this).hide();
+                }
+                else
+                {
+                    $(this).show();
                 }
             }
         })
@@ -48,8 +52,11 @@ $(document).ready(function(){
                 // remove if the plan depart before the filter time
                 if (this_date < filter_date)
                 {
-                    console.log(test_depart);
-                    $(this.remove());
+                    $(this).hide();
+                }
+                else
+                {
+                    $(this).show();
                 }
             }
         })
@@ -60,7 +67,11 @@ $(document).ready(function(){
                 // remove if the plan return after the filter time
                 if (new Date(test_ret) > new Date(ret))
                 {
-                    $(this.remove());
+                    $(this).hide();
+                }
+                else
+                {
+                    $(this).show();
                 }
             }
         })

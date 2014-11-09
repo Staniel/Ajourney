@@ -1,0 +1,53 @@
+{% extends "travelplans/index.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<div class="container col-md-8 col-md-offset-2">
+<div class="row" style="padding-top:50px">
+	<div class="col-md-3">
+		<img src="{% static 'travelplans/sample.jpg' %}" class="img-circle" style="height:200px;width:200px">
+	</div>
+	<div class="col-md-7" style="">
+		{% ifequal current_user.is_superuser False %}
+		<div class="row">
+			<p><button class="btn btn-primary pull-right">Share Plan</button></p>
+		</div>
+		<br/>
+			{% ifnotequal current_user plan.holder %}
+				<div class="row">
+					<p><button class="btn btn-primary pull-right">Join Plan</button></p>
+				</div>
+				<br/>
+			{% endifnotequal %}
+		{% endifequal %}
+		{% ifequal current_user plan.holder %}
+			<div class="row">
+				<p><button class="btn btn-primary pull-right">Edit Plan</button></p>
+			</div>
+			<br/>
+			<div class="row">
+				<p><button class="btn btn-primary pull-right">Delete Plan</button></p>
+			</div>
+			<br/>
+		{% endifequal %}
+		
+	</div>
+</div>
+<div class="row" style="padding-top:50px">
+	<p class="bg-info" style="font-size:20px; padding-top:50px; padding-left:20px; padding-right:20px; padding-bottom:50px">
+	Plan Owner: {{plan.holder}}
+	<br/>
+	Destination: {{plan.destination}}
+	<br/> 
+	Depart Date: {{plan.depart_time}}
+	<br/> 
+	Return Date: {{plan.return_time}}
+	<br/> 
+	Description: {{plan.descrption}}
+	</p>
+</div>
+
+
+</div>
+{% endblock %}
