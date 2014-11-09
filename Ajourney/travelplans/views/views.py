@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
+from travelplans.plan_manager import get_all_plans
 import facebook
 import urllib2
 import json
@@ -38,7 +39,8 @@ def home(request):
                 graph = facebook.GraphAPI(social_user.extra_data['access_token'])
                 profile = graph.get_object("me")
                 currentuser = FBuser(profile['id'],profile['name'])
-                context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends, 'currentuser': currentuser})
+                plan_list=get_all_plans()
+                context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends, 'currentuser': currentuser, 'plan_list': plan_list, 'list_title':'All available plans' })
                 return render_to_response('travelplans/view_plans.html',context_instance=context)
         else:
                 friends = None;

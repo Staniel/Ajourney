@@ -18,10 +18,6 @@ def create_plan(request, user_id=1):
     new_plan.return_time = request.POST.get('returntime', datetime.today())
     new_plan.limit = request.POST.get('limit', 2)
     new_plan.save()
-    # new_joined_plan = JoinedPlan()
-    # new_joined_plan.joined_user = user_id
-    # new_joined_plan.joined_plan = new_plan.id
-    # new_joined_plan.save()
     plan_list=get_all_plans()
     template = loader.get_template('travelplans/view_plans.html')
     context = RequestContext(request, {
