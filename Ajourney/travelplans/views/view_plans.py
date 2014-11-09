@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from travelplans.plan_manager import get_plans_by_destination,get_all_plans
+from travelplans.plan_manager import get_plans_by_destination,get_all_plans,get_plan_by_id
 
 
 def view_plans(request):
@@ -41,15 +41,16 @@ def joined_plans(request):
     return HttpResponse(template.render(context))
 
 def view_plan_detail(request):
-    plan_list=get_all_plans()
-    plan=plan_list[0]
-    user=plan.get_holder()
-    print user.is_superuser
-    is_friend=True
-    template = loader.get_template('travelplans/plan_detail.html')
-    context = RequestContext(request, {
+    planid=request.GET.get('planid')
+    plan=get_plan_by_id(planid)
+    #template = loader.get_template('travelplans/')
+    if plan:
+        user=plan.get_holder()
+        is_friend=True
+        template = loader.get_template('travelplans/plan_detail.html')
+        context = RequestContext(request, {
         'plan': plan,
         'current_user': user,
         'is_friend':is_friend,
-    })
+        })
     return HttpResponse(template.render(context))
