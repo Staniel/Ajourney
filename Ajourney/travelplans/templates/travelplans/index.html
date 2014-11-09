@@ -17,9 +17,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
 
     <title>AJourney</title>
 
@@ -31,8 +32,7 @@
   <body>
 
     <div  class="container-fluid">
-      <nav class="row navbar navbar-custom">
-        <div>
+      <nav class="row navbar-custom">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
@@ -40,11 +40,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="">AJourney</a>
+            <a class="navbar-brand" href="" style="color:white">AJourney</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul id="plantab" class="nav navbar-nav">
-              <li id="allplan" class="active "><a href="#">All Plans</a></li>
+              <li id="allplan"><a href="#">All Plans</a></li>
               <li id="myplan"><a href="#">My Plans</a></li>
               <li id="jplan"><a href="#">Joined Plans</a></li>
               <li id="createplan"><a href="#" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </a></li>
@@ -54,7 +54,6 @@
               <li><a href=""></a></li>  
             </ul>
           </div><!--/.nav-collapse -->
-        </div>
       </nav>
 
       <div class="row" id="updatecontent">
@@ -72,7 +71,7 @@
         <h4 class="modal-title" id="myModalLabel">Create New Plan</h4>
       </div>
       <div class="modal-body">
-        <form role="form" action="{% url 'travelplans:create_plan' %}" method="post">
+        <form id="createform" role="form" action="{% url 'travelplans:create_plan' %}" method="post">
         {% csrf_token %}
             <div class="form-group">
                 <label for="newdestination">Destination</label>
@@ -94,7 +93,7 @@
                 <label for="newlimit">Max Travellers</label>
                 <input type="number" name="limit" class="form-control" id="newlimit" placeholder="Enter Max Number of Travellers">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button id="createbutton" type="submit" class="btn btn-primary">Create</button>
         </form>
       </div>
     </div>

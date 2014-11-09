@@ -10,6 +10,8 @@ class Plan(models.Model):
 	return_time = models.DateTimeField()
 	def __str__(self):
 		return self.destination+'.'+self.description
+	def get_holder(self):
+		return self.holder
 class JoinedPlan(models.Model):
 	joined_user = models.ForeignKey(User)
 	joined_plan = models.ForeignKey(Plan)

@@ -42,8 +42,14 @@ def joined_plans(request):
 
 def view_plan_detail(request):
     plan_list=get_all_plans()
-    template = loader.get_template('travelplans/view_plans.html')
+    plan=plan_list[0]
+    user=plan.get_holder()
+    print user.is_superuser
+    is_friend=True
+    template = loader.get_template('travelplans/plan_detail.html')
     context = RequestContext(request, {
-        'plan_list': plan_list,
+        'plan': plan,
+        'current_user': user,
+        'is_friend':is_friend,
     })
     return HttpResponse(template.render(context))
