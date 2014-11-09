@@ -69,7 +69,7 @@ $(document).ready(function(){
                 {
                     $(this).hide();
                 }
-                    return true;   
+                    return true;
             }
             if (depart != '')
             {
