@@ -1,5 +1,33 @@
 $(document).ready(function(){
+    $('#createform').validate({
+    rules: {
+        destination: {
+            required: true
+        },
+        departtime: {
+            required: true,
+        },
+        returntime: {
+            required: true
+        },
+        limit:{
+            required: true,
+            min: 2
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    errorClass: 'help-block',
+    success: function (element) {
+        element.text('OK!').addClass('valid')
+            .closest('.form-group').removeClass('has-error').addClass('has-success');
+    }
+});
+    // $('#createbutton').click(function(e){
+    //     e.preventDefault();
 
+    // });
     $('#allplan').click(function(e){
         e.preventDefault();
        $.get('/travelplans/available_plans', function(data){
