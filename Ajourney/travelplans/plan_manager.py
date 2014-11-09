@@ -23,6 +23,13 @@ def get_plans_by_user(user):
 	plan_list=Plan.objects.filter(holder__exact=user)
 	return plan_list
 
+def get_plan_by_id(planid):
+	try:
+		plan=Plan.objects.get(id__exact=planid)
+		return plan
+	except:
+		return None
+
 def get_all_plans():
 	return Plan.objects.all()
 
