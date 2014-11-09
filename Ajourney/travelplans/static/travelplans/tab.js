@@ -1,4 +1,13 @@
+
 $(document).ready(function(){
+    $.validator.addMethod("greaterThan", 
+    function(value, element, params) {
+        if (!/Invalid|NaN/.test(new Date(value))) {
+            return new Date(value) > new Date($(params).val());
+        }
+        return isNaN(value) && isNaN($(params).val()) 
+            || (Number(value) > Number($(params).val())); 
+    },'return time must be greater than depart time.');
     $('#createform').validate({
     rules: {
         destination: {
@@ -8,7 +17,8 @@ $(document).ready(function(){
             required: true,
         },
         returntime: {
-            required: true
+            required: true,
+            greaterThan: "#newdepart"
         },
         limit:{
             required: true,
