@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
+import facebook
 import urllib2
 import json
 
@@ -10,6 +11,10 @@ def index(request):
 	context = {'test': 1}
 	return render(request, 'travelplans/index.html', context)
 
+class FBuser:
+    def __init__(self, FBid, name):
+        self.id = FBid
+        self.name = name
 
 
 def home(request):
@@ -25,8 +30,15 @@ def home(request):
                 social_user.extra_data['access_token'],
             )
                 response = urllib2.Request(url)
-                friends = json.loads(urllib2.urlopen(response).read()).get('data')
-                context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends})
+                friends_json = json.loads(urllib2.urlopen(response).read()).get('data')
+                friends = []
+                for i in xrange(len(friends_json)):
+                    friends.append(FBuser(friends_json[i]['id'],friends_json[i]['name']))
+                #friends = friends_json[0]['id']
+                graph = facebook.GraphAPI(social_user.extra_data['access_token'])
+                profile = graph.get_object("me")
+                currentuser = FBuser(profile['id'],profile['name'])
+                context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends, 'currentuser': currentuser})
                 return render_to_response('travelplans/view_plans.html',context_instance=context)
         else:
                 friends = None;

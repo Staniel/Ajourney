@@ -50,8 +50,7 @@
               <li id="createplan"><a href="#" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout </a></li> 
-              <li><a href=""></a></li>  
+              <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout </a></li>  
             </ul>
           </div><!--/.nav-collapse -->
       </nav>
@@ -102,8 +101,13 @@
  <!-- Modal -->
   </body>
   
-   <div class="row footer">
-        <p>© Copyright 2014</p>
-      </div>
+  <div class="row footer">
+       <p>© Copyright 2014</p>
+  </div>
+  <p>
+     <!--Hello {{ user.get_full_name|default:user.username }}!
+     Your ID is {{user.id}}!-->
+     Your name is {{currentuser.name}}
+     Your facebook ID is {{currentuser.id}}  </p>
 
 </html>
