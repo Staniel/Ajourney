@@ -2,10 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
-<<<<<<< HEAD
-=======
 from travelplans.plan_manager import get_all_plans
->>>>>>> f5292053eb7077b5484abe7129e20f7eebef76b5
 from travelplans.models import User
 from django.contrib.auth import login,authenticate
 import facebook
