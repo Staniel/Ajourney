@@ -51,7 +51,7 @@
               <li id="createplan"><a href="#" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="">Logout </a></li> 
+              <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout </a></li> 
               <li><a href=""></a></li>  
             </ul>
           </div><!--/.nav-collapse -->

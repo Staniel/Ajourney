@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'django_facebook',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'travelplans',
+    'social.apps.django_app.default'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -75,6 +77,27 @@ DATABASES = {
     }
 }
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+#    'django.contrib.messages.context_processors.messages',
+#    'django_facebook.context_processors.facebook',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django_facebook.auth_backends.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'social.backends.facebook.FacebookOAuth2',
+)
+
+# AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -88,8 +111,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+FACEBOOK_APP_ID = 1479318365667083
+FACEBOOK_APP_SECRET = "d169d0731b524d2194061096d97a0fc7"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+
+SOCIAL_AUTH_FACEBOOK_KEY              = '1479318365667083'
+SOCIAL_AUTH_FACEBOOK_SECRET           = 'd169d0731b524d2194061096d97a0fc7'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['public_profile','email','user_friends']
+
+LOGIN_REDIRECT_URL = '/travelplans/'
 
 STATIC_URL = '/static/'
