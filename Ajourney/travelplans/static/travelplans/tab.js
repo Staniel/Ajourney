@@ -69,11 +69,7 @@ $(document).ready(function(){
                 {
                     $(this).hide();
                 }
-<<<<<<< HEAD
                     return true;
-=======
-                    return true;   
->>>>>>> ec8d6766af557d0e48a7446c0878f44d453b13ba
             }
             if (depart != '')
             {
