@@ -102,8 +102,13 @@
 </div>
   </body>
   
-   <div class="row footer">
-        <p>© Copyright 2014</p>
-      </div>
+  <div class="row footer">
+       <p>© Copyright 2014</p>
+  </div>
+  <p>
+     <!--Hello {{ user.get_full_name|default:user.username }}!
+     Your ID is {{user.id}}!-->
+     Your name is {{currentuser.name}}
+     Your facebook ID is {{currentuser.id}}  </p>
 
 </html>
