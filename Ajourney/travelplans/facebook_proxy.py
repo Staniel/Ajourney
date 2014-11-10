@@ -29,7 +29,7 @@ def all_friends(user):
         response = urllib2.Request(url) 
     	friends_json = json.loads(urllib2.urlopen(response).read()).get('data')   
     	for i in xrange(len(friends_json)):
-			friend_list.append(FBuser(friends_json[i]['id'],friends_json[i]['name']))
+			friend_list.append(friends_json[i]['id'])
 	return friend_list
 
 def share_plan(user, plan, comment):
