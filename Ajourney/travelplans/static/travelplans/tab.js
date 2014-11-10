@@ -64,6 +64,7 @@ $(document).ready(function(){
         success:function(data){
             if (data.indexOf("error") > -1)
                 alert(data);
+            location.reload();
         },
         error: function(jqXHR, textStatus, errorThrown){
         }
