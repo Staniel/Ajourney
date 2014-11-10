@@ -1,0 +1,44 @@
+{% extends 'travelplans/base.html' %}
+
+{% block main %}
+
+<div>
+    <div  class="container-fluid">
+      <nav class="row navbar-custom">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="" style="color:white">AJourney</a>
+          </div>
+         
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+         <p>
+          <ul>
+            <form action='/admin'>
+                <input type="submit" value="Login as administrator">
+            </form>
+            <form action='{% url 'social:begin' 'facebook' %}?next={{ request.path }}'>
+                <input type="submit" value="Login with Facebook">
+            </form>
+           </ul>
+         </p>
+      </div>
+    </div>
+  </div>
+ <!-- Modal -->
+
+  
+  <div class="row footer">
+       <p>© Copyright 2014</p>
+  </div>
+  <p>
+
+
+ </div>
+{% endblock %}
