@@ -74,7 +74,7 @@ $(document).ready(function(){
     //    // e.unbind();
     // });
 
-    // $('#createbutton').click(function(e){
+    // $('#createform').submit(function(e){
     //     console.log("enter")
     //    var postData = $("#createform").serializeArray();
     //    var formURL = $("#createform").attr("action");
