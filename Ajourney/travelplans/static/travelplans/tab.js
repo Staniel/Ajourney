@@ -63,7 +63,7 @@ $(document).ready(function(){
         success:function(data){
             $("#html").html(data);
             // $(".editinput").val("");
-            $('#editPlanModal').hide();
+            // $('#editPlanModal').hide();
         },
         error: function(jqXHR, textStatus, errorThrown){
             alert(errorThrown);
@@ -83,14 +83,14 @@ $(document).ready(function(){
         data: postData,
         success:function(data){
             $("#updatecontent").html(data);
-            $(".createinput").val("");
-            $('#createNewPlanModal').hide();
+            // $(".createinput").val("");
+            // $('#createNewPlanModal').hide();
         },
         error: function(jqXHR, textStatus, errorThrown){
             alert(errorThrown);
         }
        });
-       e.preventDefault();
+       // e.preventDefault();
        // e.unbind();
     });
 
