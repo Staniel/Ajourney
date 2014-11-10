@@ -94,7 +94,9 @@ $(document).ready(function() {
     });
 
     $('#deleteform').submit(function(e) {
-        var postData = $("#createform").serializeArray();
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        var postData = $("#deleteform").serializeArray();
         var formURL = $("#deleteform").attr("name");
         $.ajax({
             url: formURL,
@@ -112,6 +114,8 @@ $(document).ready(function() {
         });
     });
     $('#shareform').submit(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
         var postData = $("#shareform").serializeArray();
         var formURL = $("#shareform").attr("name");
         $.ajax({
@@ -122,7 +126,7 @@ $(document).ready(function() {
                 if (data.indexOf("error") > -1)
                     alert(data);
                 else {
-                    alert("success");
+                    // alert("success");
                     location.reload();
                 }
             },
@@ -130,6 +134,8 @@ $(document).ready(function() {
         });
     });
     $('#joinform').submit(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
         var postData = $("#joinform").serializeArray();
         var formURL = $("#joinform").attr("name");
         $.ajax({
@@ -140,7 +146,7 @@ $(document).ready(function() {
                 if (data.indexOf("error") > -1)
                     alert(data);
                 else {
-                    alert("success");
+                    // alert("success");
                     location.reload();
                 }
             },
@@ -148,6 +154,8 @@ $(document).ready(function() {
         });
     });
     $('#unjoinform').submit(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
         var postData = $("#unjoinform").serializeArray();
         var formURL = $("#unjoinform").attr("name");
         $.ajax({
@@ -158,7 +166,7 @@ $(document).ready(function() {
                 if (data.indexOf("error") > -1)
                     alert(data);
                 else {
-                    alert("success");
+                    // alert("success");
                     location.reload();
                 }
             },
