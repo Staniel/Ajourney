@@ -1,0 +1,18 @@
+{% extends 'travelplans/base.html' %}
+
+{% block main %}
+
+<div class="container">
+
+  <div class="jumbotron" style="margin:50px;background-color:#6979b6;padding-right:0px;">
+  <h1 style="color:white">Ajourney</h1>
+  <p style="color:white">Travel, Life, and Entertainment</p>
+  <p>
+    <a class="btn btn-default" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" role="button">Login with Facebook</a></p>
+    <p>
+    <a class="btn btn-link pull-right pull-bottom" href="/admin" role="button" style="color:white">Login as administrator
+    </a></p>
+</div>
+
+ </div>
+{% endblock %}

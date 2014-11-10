@@ -10,18 +10,9 @@ import facebook
 import urllib2
 import json
 
-# Create your views here.
-def index(request):
-	context = {'test': 1}
-	return render(request, 'travelplans/index.html', context)
-
 def facebook_login(request):
-#       context = RequestContext(request,
-#                           {'request': request,
-#                           'user': request.user})
     friends = None
     if hasattr(request.user, 'social_auth'):
-        print "home entered"
         social_user = request.user.social_auth.filter(provider='facebook',).first()
         if social_user:
             url = u'https://graph.facebook.com/{0}/' \
@@ -33,7 +24,6 @@ def facebook_login(request):
             friends = []
             for i in xrange(len(friends_json)):
                 friends.append(FBuser(friends_json[i]['id'],friends_json[i]['name']))
-            #friends = friends_json[0]['id']
             graph = facebook.GraphAPI(social_user.extra_data['access_token'])
             profile = graph.get_object("me")
             currentuser = FBuser(profile['id'],profile['name'])
@@ -48,14 +38,7 @@ def facebook_login(request):
                     if currentuser and currentuser.is_active:
                         login(request,currentuser)
                         return redirect('travelplans/')
-                    else:
-                        print "None currentuser"
-
-            '''
-            context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends, 'currentuser': currentuser})
-            return render_to_response('travelplans/view_plans.html',context_instance=context)
-            '''
     else:
         friends = None
     context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends})
-    return render_to_response('travelplans/home.html',context_instance=context)
+    return render_to_response('travelplans/login.html',context_instance=context)

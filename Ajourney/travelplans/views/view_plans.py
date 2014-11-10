@@ -56,6 +56,7 @@ def view_plan_detail(request,planid):
         'sharable':pm.sharable(user,plan),
         'joinable':pm.joinable(user,plan),
         'joiners':pm.get_all_joiners(plan),
+        'has_joined':pm.has_joined_plan(user,plan),
         })
         return HttpResponse(template.render(context))
     else:
