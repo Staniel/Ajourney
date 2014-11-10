@@ -23,4 +23,8 @@ def all_friends(user):
 	return friend_list
 
 def share_plan(user, plan, comment):
+    social_user = user.social_auth.filter( provider='facebook',).first()
+    graph = facebook.GraphAPI(social_user.extra_data['access_token'])
+    graph.put_object('me', 'feed', message = comment)
+
 	return True
