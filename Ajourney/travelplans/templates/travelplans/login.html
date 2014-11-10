@@ -3,48 +3,16 @@
 {% block main %}
 
 <div class="container">
-  <!--
-    <div  class="container-fluid">
-      <nav class="row navbar-custom">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="" style="color:white">AJourney</a>
-          </div>
-  -->
 
-  <div class="jumbotron" style="margin:50px;background-color:#6979b6;">
+  <div class="jumbotron" style="margin:50px;background-color:#6979b6;padding-right:0px;">
   <h1 style="color:white">Ajourney</h1>
   <p style="color:white">Travel, Life, and Entertainment</p>
   <p>
     <a class="btn btn-default" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" role="button">Login with Facebook</a></p>
     <p>
-    <a class="btn btn-default" href="/admin" role="button">Login as administrator</a></p>
+    <a class="btn btn-link pull-right pull-bottom" href="/admin" role="button" style="color:white">Login as administrator
+    </a></p>
 </div>
-
-<!--
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-         <p>
-          <ul>
-            <form action='/admin'>
-                <input type="submit" value="Login as administrator">
-            </form>
-            <form action='{% url 'social:begin' 'facebook' %}?next={{ request.path }}'>
-                <input type="submit" value="Login with Facebook">
-            </form>
-           </ul>
-         </p>
-      </div>
-    </div>
-  </div>
-  Modal -->
-
 
  </div>
 {% endblock %}
