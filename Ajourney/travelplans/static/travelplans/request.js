@@ -2,7 +2,6 @@ URLBase = "http://localhost:8080/travelplans/";
 $(document).ready(function() {
     $.validator.addMethod("greaterThan",
         function(value, element, params) {
-            console.log($(params).val());
             if (!/Invalid|NaN/.test(new Date(value))) {
                 return new Date(value) > new Date($(params).val());
             }
@@ -115,6 +114,24 @@ $(document).ready(function() {
     $('#shareform').submit(function(e) {
         var postData = $("#shareform").serializeArray();
         var formURL = $("#shareform").attr("name");
+        $.ajax({
+            url: formURL,
+            type: "POST",
+            data: postData,
+            success: function(data) {
+                if (data.indexOf("error") > -1)
+                    alert(data);
+                else {
+                    alert("success");
+                    location.reload();
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {}
+        });
+    });
+    $('#joinform').submit(function(e) {
+        var postData = $("#joinform").serializeArray();
+        var formURL = $("#joinform").attr("name");
         $.ajax({
             url: formURL,
             type: "POST",
