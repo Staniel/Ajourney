@@ -1,58 +1,119 @@
 
 $(document).ready(function(){
-    $.validator.addMethod("greaterThan", 
-    function(value, element, params) {
-        if (!/Invalid|NaN/.test(new Date(value))) {
-            return new Date(value) > new Date($(params).val());
-        }
-        return isNaN(value) && isNaN($(params).val()) 
-            || (Number(value) > Number($(params).val())); 
-    },'return time must be greater than depart time.');
-    $('#createform').validate({
-    rules: {
-        destination: {
-            required: true
-        },
-        departtime: {
-            required: true,
-        },
-        returntime: {
-            required: true,
-            greaterThan: "#newdepart"
-        },
-        limit:{
-            required: true,
-            min: 2,
-            digits: true
-        }
-    },
-    highlight: function (element) {
-        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-    },
-    errorClass: 'help-block',
-    success: function (element) {
-        element.text('OK!').addClass('valid')
-            .closest('.form-group').removeClass('has-error').addClass('has-success');
-    }
-});
-    $('#allplan').click(function(e){
-        e.preventDefault();
-       $.get('/travelplans/available_plans', function(data){
-         $("#updatecontent").html(data);
-        });
-    });
-    $('#myplan').click(function(e){
-        e.preventDefault();
-       $.get('/travelplans/my_plans', function(data){
-         $("#updatecontent").html(data);
-        });
-    });
-    $('#jplan').click(function(e){
-        e.preventDefault();
-       $.get('/travelplans/joined_plans', function(data){
-         $("#updatecontent").html(data);
-        });
-    });
+//     $.validator.addMethod("greaterThan", 
+//     function(value, element, params) {
+//         if (!/Invalid|NaN/.test(new Date(value))) {
+//             return new Date(value) > new Date($(params).val());
+//         }
+//         return isNaN(value) && isNaN($(params).val()) 
+//             || (Number(value) > Number($(params).val())); 
+//     },'return time must be greater than depart time.');
+//     $('#createform').validate({
+//     rules: {
+//         destination: {
+//             required: true
+//         },
+//         departtime: {
+//             required: true,
+//         },
+//         returntime: {
+//             required: true,
+//             greaterThan: "#newdepart"
+//         },
+//         limit:{
+//             required: true,
+//             min: 2,
+//             digits: true
+//         }
+//     },
+//     highlight: function (element) {
+//         $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+//     },
+//     errorClass: 'help-block',
+//     success: function (element) {
+//         element.text('OK!').addClass('valid')
+//             .closest('.form-group').removeClass('has-error').addClass('has-success');
+//     }
+// });
+    // $('#allplan').click(function(e){
+    //     e.preventDefault();
+    //    $.get('/travelplans/available_plans', function(data){
+    //      $("#updatecontent").html(data);
+    //     });
+    // });
+    // $('#myplan').click(function(e){
+    //     e.preventDefault();
+    //    $.get('/travelplans/my_plans', function(data){
+    //      $("#updatecontent").html(data);
+    //     });
+    // });
+    // $('#jplan').click(function(e){
+    //     e.preventDefault();
+    //    $.get('/travelplans/joined_plans', function(data){
+    //      $("#updatecontent").html(data);
+    //     });
+    // });
+    //     $('#editbutton').click(function(e){
+    //    var postData = $("#editform").serializeArray();
+    //    var formURL = $("#editform").attr("action");
+    //    $.ajax({
+    //     url: formURL,
+    //     type: "POST",
+    //     data: postData,
+    //     success:function(data){
+    //         alert("success");
+    //         // $("#html").html(data);
+    //         // // $(".editinput").val("");
+    //         // $('#editPlanModal').hide();
+    //     },
+    //     error: function(jqXHR, textStatus, errorThrown){
+    //         alert(errorThrown);
+    //     }
+    //    });
+    //    // e.preventDefault();
+    //    // e.unbind();
+    // });
+
+    // $('#createbutton').click(function(e){
+    //     console.log("enter")
+    //    var postData = $("#createform").serializeArray();
+    //    var formURL = $("#createform").attr("action");
+    //    $.ajax({
+    //     url: formURL,
+    //     type: "POST",
+    //     data: postData,
+    //     success:function(data){
+    //         alert("success");
+    //         // $("#updatecontent").html(data);
+    //         // $(".createinput").val("");
+    //         // $('#createNewPlanModal').hide();
+    //     },
+    //     error: function(jqXHR, textStatus, errorThrown){
+    //         alert(errorThrown);
+    //     }
+    //    });
+    //    // e.preventDefault();
+    //    // e.unbind();
+    // });
+    //     $('#deletebutton').click(function(e){
+    //    var formURL = $("#deleteform").attr("action");
+    //    $.ajax({
+    //     url: formURL,
+    //     type: "POST",
+    //     data: null,
+    //     success:function(data){
+    //         alert("success");
+    //         // $("#updatecontent").html(data);
+    //         // $(".createinput").val("");
+    //         // $('#deletePlanModal').hide();
+    //     },
+    //     error: function(jqXHR, textStatus, errorThrown){
+    //         alert(errorThrown);
+    //     }
+    //    });
+    //    // e.preventDefault();
+    //    // e.unbind();
+    // });
 
       $('#searchbutton').click(function(e){
         e.preventDefault();

@@ -40,16 +40,17 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="" style="color:white">AJourney</a>
+            <a class="navbar-brand" href="{% url 'travelplans:view_plans' %}" style="color:white">AJourney</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul id="plantab" class="nav navbar-nav">
-              <li id="allplan"><a href="#">All Plans</a></li>
-              <li id="myplan"><a href="#">My Plans</a></li>
-              <li id="jplan"><a href="#">Joined Plans</a></li>
+              <li id="allplan"><a href="{% url 'travelplans:view_plans' %}">All Plans</a></li>
+              <li id="myplan"><a href="{% url 'travelplans:view_my_plans' %}">My Plans</a></li>
+              <li id="jplan"><a href="{% url 'travelplans:view_joined_plans' %}">Joined Plans</a></li>
               <li id="createplan"><a href="#" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Welcome, {{user.first_name}}</a></li>
               <li><a href="{% url 'auth:logout' %}?next={{ '/' }}">Logout </a></li>  
             </ul>
           </div><!--/.nav-collapse -->
@@ -74,23 +75,23 @@
         {% csrf_token %}
             <div class="form-group">
                 <label for="newdestination">Destination</label>
-                <input type="text" name="destination" class="form-control" id="newdestination" placeholder="Enter Destination">
+                <input type="text" name="destination" class="createinput form-control" id="newdestination" placeholder="Enter Destination">
             </div>
             <div class="form-group">
                 <label for="newdepart">Depart Time</label>
-                <input type="date" name="departtime" class="form-control" id="newdepart" placeholder="Depart Time">
+                <input type="date" name="departtime" class="createinput form-control" id="newdepart" placeholder="Depart Time">
             </div>
             <div class="form-group">
                 <label for="newreturn">Return Time</label>
-                <input type="date" name="returntime" class="form-control" id="newreturn" placeholder="Return Time">
+                <input type="date" name="returntime" class="createinput form-control" id="newreturn" placeholder="Return Time">
             </div>
             <div class="form-group">
                 <label for="newdescription">Description</label>
-                <textarea class="form-control" name="description" id="newdescription" placeholder="Enter Description" row="3"></textarea>
+                <textarea class="createinput form-control" name="description" id="newdescription" placeholder="Enter Description" row="3"></textarea>
             </div>
             <div class="form-group">
                 <label for="newlimit">Max Travellers</label>
-                <input type="number" name="limit" class="form-control" id="newlimit" placeholder="Enter Max Number of Travellers">
+                <input type="number" name="limit" class="createinput form-control" id="newlimit" placeholder="Enter Max Number of Travellers">
             </div>
             <button id="createbutton" type="submit" class="btn btn-primary">Create</button>
         </form>

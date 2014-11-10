@@ -9,19 +9,19 @@
 		<img src="{% static 'travelplans/sample.jpg' %}" class="img-circle" style="height:200px;width:200px">
 	</div>
 	<div class="col-md-7" style="">
-		{% ifequal current_user.is_superuser False %}
+		{% ifequal sharable True %}
 		<div class="row">
 			<p><button class="btn btn-primary pull-right">Share Plan</button></p>
 		</div>
 		<br/>
-			{% ifnotequal current_user plan.holder %}
+			{% ifequal joinable True %}
 				<div class="row">
 					<p><button class="btn btn-primary pull-right">Join Plan</button></p>
 				</div>
 				<br/>
-			{% endifnotequal %}
+			{% endifequal %}
 		{% endifequal %}
-		{% ifequal current_user plan.holder %}
+		{% ifequal editable True %}
 			<div class="row">
 				<p>
 					<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#editPlanModal">
@@ -68,30 +68,30 @@
         <h4 class="modal-title" id="myModalLabel">Edit Plan</h4>
       </div>
       <div class="modal-body">
-        <form id="editform" role="form" action="{% url 'travelplans:create_plan' %}" method="post">
+        <form id="editform" role="form" action="{% url 'travelplans:edit_plan' plan.id%}" method="post">
         {% csrf_token %}
             <div class="form-group">
                 <label for="editdestination">Destination</label>
-                <input type="text" name="editdestination" class="form-control" id="editdestination" value="{{plan.destination}}">
+                <input type="text" name="editdestination" class="editinput form-control" id="editdestination" value="{{plan.destination}}">
             </div>
             <div class="form-group">
                 <label for="editdepart">Depart Time</label>
- <input type="date" name="editdepart" class="form-control" id="editdepart" value="{{plan.depart_time| date:"m-d-Y"}}">
+ <input type="date" name="editdepart" class="editinput form-control" id="editdepart" value="{{plan.depart_time| date:"m-d-Y"}}">
             </div>
             <div class="form-group">
                 <label for="editreturn">Return Time</label>
-  <input type="date" name="editreturn" class="form-control" id="editreturn" value="{{plan.return_time| date:"m-d-Y"}}">
+  <input type="date" name="editreturn" class="editinput form-control" id="editreturn" value="{{plan.return_time| date:"m-d-Y"}}">
             </div>
             <div class="form-group">
                 <label for="editdescription">Description</label>
- <textarea class="form-control" name="editdescription" id="editdescription" row="3">{{plan.description}}
+ <textarea class="editinput form-control" name="editdescription" id="editdescription" row="3">{{plan.description}}
  </textarea>
             </div>
             <div class="form-group">
                 <label for="editlimit">Max Travellers</label>
-                <input type="number" name="editlimit" class="form-control" id="editlimit" value="{{plan.limit}}">
+                <input type="number" name="editlimit" class="editinput form-control" id="editlimit" value="{{plan.limit}}">
             </div>
-            <button id="editbutton" type="submit" class="btn btn-primary">Create</button>
+            <button id="editbutton" type="submit" class="btn btn-primary">Done</button>
         </form>
       </div>
     </div>
@@ -107,7 +107,8 @@
         <h4 class="modal-title" id="myModalLabel">Delete Plan</h4>
       </div>
       <div class="modal-body">
-        <form id="deleteform" role="form" action="{% url 'travelplans:create_plan' %}" method="post">
+        <form id="deleteform" role="form" action="{% url 'travelplans:delete_plan' plan.id%}" method="post">
+        	{% csrf_token %}
         <p> Are you sure you want to delete this plan? </p>
             <button id="deletebutton" type="submit" class="btn btn-primary">Yes</button>
         </form>

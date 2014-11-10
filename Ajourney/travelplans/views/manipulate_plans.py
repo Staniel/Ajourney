@@ -6,30 +6,42 @@ from view_plans import my_plans
 from travelplans.models import Plan
 from datetime import datetime
 from django.template import RequestContext, loader
-from travelplans.plan_manager import get_all_plans
+from travelplans.plan_manager import PlanManager
 
-def create_plan(request, user_id=1):
-    user = get_object_or_404(User, pk=user_id)
-    new_plan = Plan()
-    new_plan.holder = user
-    new_plan.destination = request.POST.get('destination', "nonedestination")
-    new_plan.description = request.POST.get('description', "nonedescript")
-    new_plan.depart_time = request.POST.get('departtime', datetime.today())
-    new_plan.return_time = request.POST.get('returntime', datetime.today())
-    new_plan.limit = request.POST.get('limit', 2)
-    new_plan.save()
-    plan_list=get_all_plans()
-    template = loader.get_template('travelplans/view_plans.html')
-    context = RequestContext(request, {
-        'plan_list': plan_list,
-        'list_title': "All My Plans",
-    })
-    return HttpResponse(template.render(context))
-    #there is some problem with redirect to another view
-    # return HttpResponseRedirect(reverse('travelplans:my_plans'))
-    # redirect('travelplans/my_plans')
-def edit_plan(request):
-    return HttpResponse("edit plan")
+def create_plan(request):
+    try:
+        user = request.user
+        if user.is_authenticated():
+            new_plan = Plan()
+            new_plan.holder = user
+            new_plan.destination = request.POST.get('destination', "nonedestination")
+            new_plan.description = request.POST.get('description', "nonedescript")
+            new_plan.depart_time = request.POST.get('departtime', datetime.today())
+            new_plan.return_time = request.POST.get('returntime', datetime.today())
+            new_plan.limit = request.POST.get('limit', 2)
+            #avoid exception page, will be refactored later
+            if not isinstance(new_plan.limit, int) or new_plan.limit <= 1:
+                new_plan.limit = 2
+            new_plan.save()
+            print "create one"
+            return redirect("travelplans:view_my_plans")
+    except Exception as e:
+            return HttpResponse(str(e))
+def edit_plan(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    pm=PlanManager()
+    if request.user.is_authenticated() and pm.editable(request.user, plan):
+        plan.destination = request.POST.get('editdestination', "nonedestination");
+        plan.description = request.POST.get('editdescription', "nonedestination");
+        plan.depart_time = request.POST.get('editdepart', datetime.today())
+        plan.return_time = request.POST.get('editreturn', datetime.today())
+        plan.limit = request.POST.get('editlimit', 2)
+        plan.save()
+        return redirect("travelplans:view_plan_detail", planid = plan_id)
 
-def delete_plan(request):
-    return HttpResponse("delete plans")
+def delete_plan(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    pm=PlanManager()
+    if request.user.is_authenticated() and pm.editable(request.user, plan):
+        plan.delete()
+    return redirect("travelplans:view_my_plans")
