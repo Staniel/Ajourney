@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^view_plan_detail$', view_plans.view_plan_detail, name='view_plan_detail'),
 
     url(r'^create_plan$', manipulate_plans.create_plan, name='create_plan'),
-    # url(r'^edit_plan$', manipulate_plans.edit_plan, name='edit_plan'),
+    url(r'^edit_plan/(?P<plan_id>\d+)$', manipulate_plans.edit_plan, name='edit_plan'),
     # url(r'^delete_plan$', manipulate_plans.delete_plan, name='delete_plan'),
 
     # url(r'^join_plan$', join_plan.join_plan, name='join_plan'),
