@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 #    url(r'^facebook/', include('django_facebook.urls')),
 	url('', include('django.contrib.auth.urls', namespace='auth')),
 	url('', include('social.apps.django_app.urls', namespace='social')),
-	url(r'^$', 'travelplans.views.views.home', name='home'),
+	url(r'^$', 'travelplans.views.views.facebook_login', name='login'),
 )

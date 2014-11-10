@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from travelplans.plan_manager import get_plans_by_destination,get_all_plans,get_plan_by_id
+from django.shortcuts import render,redirect
 
 
 def view_plans(request):
@@ -40,8 +41,7 @@ def joined_plans(request):
     })
     return HttpResponse(template.render(context))
 
-def view_plan_detail(request):
-    planid=request.GET.get('planid')
+def view_plan_detail(request,planid):
     plan=get_plan_by_id(planid)
     #template = loader.get_template('travelplans/')
     if plan:

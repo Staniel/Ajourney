@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     url(r'^my_plans$', view_plans.my_plans, name='view_my_plans'),
     url(r'^available_plans$', view_plans.available_plans, name='view_available_plans'),
     url(r'^joined_plans$', view_plans.joined_plans, name='view_joined_plans'),
-    url(r'^view_plan_detail$', view_plans.view_plan_detail, name='view_plan_detail'),
+    url(r'^view_plan_detail/(?P<planid>[0-9]+)/$', view_plans.view_plan_detail, name='view_plan_detail'),
 
     url(r'^create_plan$', manipulate_plans.create_plan, name='create_plan'),
     # url(r'^edit_plan$', manipulate_plans.edit_plan, name='edit_plan'),
