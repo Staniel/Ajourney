@@ -80,7 +80,7 @@
         <h4 class="modal-title" id="myModalLabel">Edit Plan</h4>
       </div>
       <div class="modal-body">
-        <form id="editform" role="form" action="{% url 'travelplans:edit_plan' plan.id%}" method="post">
+        <form id="editform" role="form" name="{% url 'travelplans:edit_plan' plan.id%}" method="post">
         {% csrf_token %}
             <div class="form-group">
                 <label for="editdestination">Destination</label>
@@ -119,7 +119,7 @@
         <h4 class="modal-title" id="myModalLabel">Delete Plan</h4>
       </div>
       <div class="modal-body">
-        <form id="deleteform" role="form" action="{% url 'travelplans:delete_plan' plan.id%}" method="post">
+        <form id="deleteform" role="form" name="{% url 'travelplans:delete_plan' plan.id%}" method="post">
         	{% csrf_token %}
         <p> Are you sure you want to delete this plan? </p>
             <button id="deletebutton" type="submit" class="btn btn-primary">Yes</button>

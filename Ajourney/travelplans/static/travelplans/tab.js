@@ -1,5 +1,6 @@
-
+URLBase = "http://localhost:8080/travelplans/"
 $(document).ready(function(){
+
 //     $.validator.addMethod("greaterThan", 
 //     function(value, element, params) {
 //         if (!/Invalid|NaN/.test(new Date(value))) {
@@ -53,67 +54,57 @@ $(document).ready(function(){
     //      $("#updatecontent").html(data);
     //     });
     // });
-    //     $('#editbutton').click(function(e){
-    //    var postData = $("#editform").serializeArray();
-    //    var formURL = $("#editform").attr("action");
-    //    $.ajax({
-    //     url: formURL,
-    //     type: "POST",
-    //     data: postData,
-    //     success:function(data){
-    //         alert("success");
-    //         // $("#html").html(data);
-    //         // // $(".editinput").val("");
-    //         // $('#editPlanModal').hide();
-    //     },
-    //     error: function(jqXHR, textStatus, errorThrown){
-    //         alert(errorThrown);
-    //     }
-    //    });
-    //    // e.preventDefault();
-    //    // e.unbind();
-    // });
+        $('#editbutton').click(function(e){
+       var postData = $("#editform").serializeArray();
+       var formURL = $("#editform").attr("name");
+       $.ajax({
+        url: formURL,
+        type: "POST",
+        data: postData,
+        success:function(data){
+            if (data.indexOf("error") > -1)
+                alert(data);
+            location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+       });
+    });
 
-    // $('#createform').submit(function(e){
-    //     console.log("enter")
-    //    var postData = $("#createform").serializeArray();
-    //    var formURL = $("#createform").attr("action");
-    //    $.ajax({
-    //     url: formURL,
-    //     type: "POST",
-    //     data: postData,
-    //     success:function(data){
-    //         alert("success");
-    //         // $("#updatecontent").html(data);
-    //         // $(".createinput").val("");
-    //         // $('#createNewPlanModal').hide();
-    //     },
-    //     error: function(jqXHR, textStatus, errorThrown){
-    //         alert(errorThrown);
-    //     }
-    //    });
-    //    // e.preventDefault();
-    //    // e.unbind();
-    // });
-    //     $('#deletebutton').click(function(e){
-    //    var formURL = $("#deleteform").attr("action");
-    //    $.ajax({
-    //     url: formURL,
-    //     type: "POST",
-    //     data: null,
-    //     success:function(data){
-    //         alert("success");
-    //         // $("#updatecontent").html(data);
-    //         // $(".createinput").val("");
-    //         // $('#deletePlanModal').hide();
-    //     },
-    //     error: function(jqXHR, textStatus, errorThrown){
-    //         alert(errorThrown);
-    //     }
-    //    });
-    //    // e.preventDefault();
-    //    // e.unbind();
-    // });
+    $('#createbutton').click(function(e){
+       var postData = $("#createform").serializeArray();
+       var formURL = $("#createform").attr("name");
+       $.ajax({
+        url: formURL,
+        type: "POST",
+        data: postData,
+        success:function(data){
+            if (data.indexOf("error") > -1)
+                alert(data);
+            else
+                location.href = URLBase+"my_plans";
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+       });
+    });
+        $('#deletebutton').click(function(e){
+        var postData = $("#createform").serializeArray();
+       var formURL = $("#deleteform").attr("name");
+       $.ajax({
+        url: formURL,
+        type: "POST",
+        data: postData,
+        success:function(data){
+            if (data.indexOf("error") > -1)
+                alert(data);
+            else 
+                {location.href = URLBase+"my_plans";alert("successful delete");}
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+       });
+    });
 
       $('#searchbutton').click(function(e){
         e.preventDefault();

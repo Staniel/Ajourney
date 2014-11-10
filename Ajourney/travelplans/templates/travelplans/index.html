@@ -71,7 +71,7 @@
         <h4 class="modal-title" id="myModalLabel">Create New Plan</h4>
       </div>
       <div class="modal-body">
-        <form id="createform" role="form" action="{% url 'travelplans:create_plan' %}" method="post">
+        <form id="createform" role="form" name="{% url 'travelplans:create_plan' %}" method="post">
         {% csrf_token %}
             <div class="form-group">
                 <label for="newdestination">Destination</label>
