@@ -6,7 +6,7 @@ from view_plans import my_plans
 from travelplans.models import Plan
 from datetime import datetime
 from django.template import RequestContext, loader
-from travelplans.plan_manager import get_all_plans, editable
+from travelplans.plan_manager import PlanManager
 
 def create_plan(request):
     try:
@@ -26,7 +26,8 @@ def create_plan(request):
 def edit_plan(request, plan_id):
     try:    
         plan = get_object_or_404(Plan, pk=plan_id)
-        if request.user.is_authenticated() and editable(request.user, plan):
+        pm=PlanManager()
+        if request.user.is_authenticated() and pm.editable(request.user, plan):
             plan.destination = request.POST.get('editdestination', "nonedestination");
             plan.description = request.POST.get('editdescription', "nonedestination");
             plan.depart_time = request.POST.get('editdepart', datetime.today())
@@ -42,7 +43,8 @@ def edit_plan(request, plan_id):
 def delete_plan(request, plan_id):
     try:
         plan = get_object_or_404(Plan, pk=plan_id)
-        if request.user.is_authenticated() and editable(request.user, plan):
+        pm = PlanManager()
+        if request.user.is_authenticated() and pm.editable(request.user, plan):
             plan.delete()
             return HttpResponse("true")
         else:

@@ -9,19 +9,19 @@
 		<img src="{% static 'travelplans/sample.jpg' %}" class="img-circle" style="height:200px;width:200px">
 	</div>
 	<div class="col-md-7" style="">
-		{% ifequal current_user.is_superuser False %}
+		{% ifequal sharable True %}
 		<div class="row">
 			<p><button class="btn btn-primary pull-right">Share Plan</button></p>
 		</div>
 		<br/>
-			{% ifnotequal current_user plan.holder %}
+			{% ifequal joinable True %}
 				<div class="row">
 					<p><button class="btn btn-primary pull-right">Join Plan</button></p>
 				</div>
 				<br/>
-			{% endifnotequal %}
+			{% endifequal %}
 		{% endifequal %}
-		{% ifequal current_user plan.holder %}
+		{% ifequal editable True %}
 			<div class="row">
 				<p>
 					<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#editPlanModal">
