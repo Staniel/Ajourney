@@ -16,5 +16,4 @@ urlpatterns = patterns('',
 
     # url(r'^join_plan$', join_plan.join_plan, name='join_plan'),
     url(r'^share_plan(?P<plan_id>\d+)$', share_plan.share_plan, name='share_plan'),
-    url(r'^index$', views.index, name='index'),
 )

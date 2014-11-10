@@ -13,7 +13,6 @@ import json
 def facebook_login(request):
     friends = None
     if hasattr(request.user, 'social_auth'):
-        print "home entered"
         social_user = request.user.social_auth.filter(provider='facebook',).first()
         if social_user:
             url = u'https://graph.facebook.com/{0}/' \
@@ -39,8 +38,7 @@ def facebook_login(request):
                     if currentuser and currentuser.is_active:
                         login(request,currentuser)
                         return redirect('travelplans/')
-                    else:
     else:
         friends = None
     context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends})
-    return render_to_response('travelplans/home.html',context_instance=context)
+    return render_to_response('travelplans/login.html',context_instance=context)
