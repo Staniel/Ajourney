@@ -19,14 +19,10 @@ def create_plan(request):
             new_plan.depart_time = request.POST.get('departtime', datetime.today())
             new_plan.return_time = request.POST.get('returntime', datetime.today())
             new_plan.limit = request.POST.get('limit', 2)
-            #avoid exception page, will be refactored later
-            if not isinstance(new_plan.limit, int) or new_plan.limit <= 1:
-                new_plan.limit = 2
             new_plan.save()
-            print "create one"
             return redirect("travelplans:view_my_plans")
     except Exception as e:
-            return HttpResponse(str(e))
+            return HttpResponse(e)
 def edit_plan(request, plan_id):
     plan = get_object_or_404(Plan, pk=plan_id)
     pm=PlanManager()
