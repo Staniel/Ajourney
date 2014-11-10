@@ -2,7 +2,8 @@
 
 {% block main %}
 
-<div>
+<div class="container">
+  <!--
     <div  class="container-fluid">
       <nav class="row navbar-custom">
           <div class="navbar-header">
@@ -14,7 +15,18 @@
             </button>
             <a class="navbar-brand" href="" style="color:white">AJourney</a>
           </div>
-         
+  -->
+
+  <div class="jumbotron" style="margin:50px;background-color:#6979b6;">
+  <h1 style="color:white">Ajourney</h1>
+  <p style="color:white">Travel, Life, and Entertainment</p>
+  <p>
+    <a class="btn btn-default" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" role="button">Login with Facebook</a></p>
+    <p>
+    <a class="btn btn-default" href="/admin" role="button">Login as administrator</a></p>
+</div>
+
+<!--
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -31,7 +43,7 @@
       </div>
     </div>
   </div>
- <!-- Modal -->
+  Modal -->
 
 
  </div>

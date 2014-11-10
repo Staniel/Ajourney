@@ -2,74 +2,52 @@
 
 {% block content %}
 {% load static %}
-<div class="container col-md-8 col-md-offset-2">
-<div class="row" style="padding-top:50px">
+<div class="container" style="margin-top:50px;background-color:#D5DBF0">
+<div class="row" style="margin:50px">
 	<div class="col-md-3">
-		<img src="{% static 'travelplans/sample.jpg' %}" class="img-circle" style="height:200px;width:200px">
+		<img src="{% static 'travelplans/sample.jpg' %}" class="img-circle" style="height:200px;width:200px;margin:20px">
+    <div class="row pull-right">
+      {% ifequal editable True %}
+      <span class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#editPlanModal"></span>
+      <span class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#deletePlanModal"></span>
+      {% endifequal %}
+      {% ifequal joinable True %}
+      <span class="glyphicon glyphicon-heart-empty" data-toggle="modal" data-target="#joinPlanModal"></span>
+      {% endifequal %}
+      {% ifequal has_joined True %}
+       <span class="glyphicon glyphicon-heart" data-toggle="modal" data-target="#unjoinPlanModal"></span>
+      {% endifequal %}
+      {% ifequal sharable True %}
+      <span class="glyphicon glyphicon-share" data-toggle="modal" data-target="#sharePlanModal"></span>
+      {% endifequal %}
+    </div>
+    <br/>
 	</div>
-	<div class="col-md-7" style="">
-		{% ifequal sharable True %}
-		<div class="row">
-			<p><button class="btn btn-primary pull-right" data-toggle="modal" data-target="#sharePlanModal">Share Plan
-			</button></p>
-		</div>
-		<br/>
-			{% ifequal joinable True %}
-				<div class="row">
-					<p><button class="btn btn-primary pull-right" data-toggle="modal" data-target="#joinPlanModal">Join Plan
-					</button></p>
-				</div>
-				<br/>
-			{% endifequal %}
-		{% endifequal %}
-		{% ifequal editable True %}
-			<div class="row">
-				<p>
-					<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#editPlanModal">
-						Edit Plan
-					</button>
-				</p>
-			</div>
-			<br/>
-			<div class="row">
-				<p>
-				<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#deletePlanModal">Delete Plan
-				</button>
-			</p>
-			</div>
-			<br/>
-		{% endifequal %}
-		
+
+	<div class="col-md-7 col-md-offset-1" style="">
+    <h1>Travel To <span class="label label-danger">{{plan.destination}}</span> </h1>
+    <h3>From 
+      <span class="label label-warning">{{plan.depart_time| date:"m-d-Y"}}</span> To
+      <span class="label label-warning">{{plan.return_time| date:"m-d-Y"}}</span>
+      </h3>
+    <h4>Created By <span class="label label-success">{{plan.holder}}</span></h4>
+    <h4><span class="label label-primary">{{plan.limit}}</span> Max Travellers</h4>
+    <h4>{% if joiners.0 %}
+        {% for joiner in joiners %}
+        <span class="label label-info">{{joiner.first_name}} {{joiner.last_name}}</span>
+        {% endfor %}
+        joined</h4>
+        {% endif %}
+        {% if not joiners.0 %}
+        Nobody has joined</h4>
+        {% endif %}
+        <br/>
+    <div style="background-color:#C0CAF0;padding:20px">
+      {{plan.description}}
+    </div>
 	</div>
 </div>
 
-<div class="row" style="padding-top:50px">
-	<p class="bg-info" style="font-size:20px; padding-top:50px; padding-left:20px; padding-right:20px; padding-bottom:50px">
-	Plan Owner: {{plan.holder.first_name}} {{plan.holder.last_name}}
-	<br/>
-	Destination: {{plan.destination}}
-	<br/> 
-	Depart Date: {{plan.depart_time| date:"m-d-Y"}}
-	<br/> 
-	Return Date: {{plan.return_time| date:"m-d-Y"}}
-	<br/> 
-	Description: {{plan.description}}
-	<br/>
-	Max Travellers: {{plan.limit}}
-	<br/>
-	Already Joined Travellers: 
-	{% if joiners.0 %}
-		{% for joiner in joiners %}
-		{{joiner.first_name}} {{joiner.last_name}},
-		{% endfor %}
-	{% endif %}
-	{% if not joiners.0 %}
-	None
-	{% endif %}
-	</p>
-</div>
-
-</div>
 
 <div class="modal fade" id="editPlanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -141,6 +119,25 @@
         	{% csrf_token %}
         <p> Do you want to join this plan? </p>
             <button id="joinbutton" type="submit" class="btn btn-primary">Yes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- Modal -->
+
+ <div class="modal fade" id="unjoinPlanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Quit Plan</h4>
+      </div>
+      <div class="modal-body">
+        <form id="unjoinform" role="form" name="{% url 'travelplans:unjoin_plan' plan.id%}" method="post">
+          {% csrf_token %}
+        <p> Do you want to quit this plan? </p>
+            <button id="unjoinbutton" type="submit" class="btn btn-primary">Yes</button>
         </form>
       </div>
     </div>

@@ -51,6 +51,13 @@ class PlanManager(object):
 			plans.append(joinedplan.joined_plan)
 		return plans
 
+	def has_joined_plan(self,user,plan):
+		try:
+			joinedplans=JoinedPlan.objects.get(joined_plan__exact=plan,joined_user__exact=user)
+			return True
+		except:
+			return False
+
 	def get_all_available_plans(self,user):
 		plan_list=self.get_all_plans()
 		available_plans=[]
@@ -86,7 +93,7 @@ class PlanManager(object):
 			isfriend=is_friend(user,plan.holder)
 			joiners=self.get_all_joiners(plan)
 			if isfriend or plan.holder.is_superuser:
-				if user not in joiners:
+				if len(joiners)<plan.limit-1 and user not in joiners:
 					return True
 				else:
 					return False

@@ -147,4 +147,22 @@ $(document).ready(function() {
             error: function(jqXHR, textStatus, errorThrown) {}
         });
     });
+    $('#unjoinform').submit(function(e) {
+        var postData = $("#unjoinform").serializeArray();
+        var formURL = $("#unjoinform").attr("name");
+        $.ajax({
+            url: formURL,
+            type: "POST",
+            data: postData,
+            success: function(data) {
+                if (data.indexOf("error") > -1)
+                    alert(data);
+                else {
+                    alert("success");
+                    location.reload();
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {}
+        });
+    });
 });

@@ -20,3 +20,15 @@ def join_plan(request, plan_id):
 	except Exception as e:
 		return HttpResponse("error: "+str(e))
 
+def unjoin_plan(request, plan_id):
+	try:
+		user = request.user
+		if not user.is_authenticated():
+			return redirect('login')
+		pm = PlanManager()
+		joined_plan=JoinedPlan.objects.get(joined_plan__exact=plan_id,joined_user__exact=user)
+		joined_plan.delete()
+		return HttpResponse("true")
+	except Exception as e:
+		return HttpResponse("error: "+str(e))
+
