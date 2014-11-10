@@ -43,7 +43,7 @@ def joined_plans(request):
 def view_plan_detail(request):
     planid=request.GET.get('planid')
     plan=get_plan_by_id(planid)
-    template = loader.get_template('travelplans/')
+    #template = loader.get_template('travelplans/')
     if plan:
         user=plan.get_holder()
         is_friend=True

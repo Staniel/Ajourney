@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
+from travelplans.plan_manager import get_all_plans
 from travelplans.models import User
 from social.apps.django_app.default.models import UserSocialAuth
 from django.contrib.auth import login,authenticate
@@ -43,6 +44,7 @@ def facebook_login(request):
             graph = facebook.GraphAPI(social_user.extra_data['access_token'])
             profile = graph.get_object("me")
             currentuser = FBuser(profile['id'],profile['name'])
+
             facebookid=currentuser.id
             usersocialauth=UserSocialAuth.objects.filter(uid__exact=facebookid)
             if len(usersocialauth)>0:

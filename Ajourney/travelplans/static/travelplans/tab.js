@@ -35,10 +35,6 @@ $(document).ready(function(){
             .closest('.form-group').removeClass('has-error').addClass('has-success');
     }
 });
-    // $('#createbutton').click(function(e){
-    //     e.preventDefault();
-
-    // });
     $('#allplan').click(function(e){
         e.preventDefault();
        $.get('/travelplans/available_plans', function(data){
@@ -73,7 +69,7 @@ $(document).ready(function(){
                 {
                     $(this).hide();
                 }
-                    return true;   
+                    return true;
             }
             if (depart != '')
             {
@@ -100,8 +96,6 @@ $(document).ready(function(){
                     return true;
                 }
             }
-        })
-        
+        }) 
     }); 
-
     }); 
