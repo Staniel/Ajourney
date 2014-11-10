@@ -47,7 +47,7 @@ def edit_plan(request, plan_id):
 
 def delete_plan(request, plan_id):
     try:
-        if not user.is_authenticated():
+        if not request.user.is_authenticated():
             return redirect('login')
         plan = get_object_or_404(Plan, pk=plan_id)
         pm = PlanManager()

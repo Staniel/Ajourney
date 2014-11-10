@@ -1,5 +1,12 @@
+
 {% extends 'travelplans/base.html' %}
 {% block main %}
+{% load staticfiles %}
+   
+    
+    <script type="text/javascript" src="{% static 'travelplans/search.js' %}"></script>
+    <script type="text/javascript" src="{% static 'travelplans/request.js' %}"></script>
+
     <div  class="container-fluid">
       <nav class="row navbar-custom">
           <div class="navbar-header">
