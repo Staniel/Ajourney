@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from travelplans.plan_manager import get_all_plans
 from travelplans.models import User
+from social.apps.django_app.default.models import UserSocialAuth
 from django.contrib.auth import login,authenticate
 import facebook
 import urllib2
@@ -20,13 +21,14 @@ class FBuser:
         self.name = name
 
 
-def home(request):
+def facebook_login(request):
 #       context = RequestContext(request,
 #                           {'request': request,
 #                           'user': request.user})
     friends = None
     if hasattr(request.user, 'social_auth'):
-        social_user = request.user.social_auth.filter( provider='facebook',).first()
+        print "home entered"
+        social_user = request.user.social_auth.filter(provider='facebook',).first()
         if social_user:
             url = u'https://graph.facebook.com/{0}/' \
                 u'friends?fields=id,name,location,picture' \
@@ -42,26 +44,19 @@ def home(request):
             graph = facebook.GraphAPI(social_user.extra_data['access_token'])
             profile = graph.get_object("me")
             currentuser = FBuser(profile['id'],profile['name'])
-#            plan_list=get_all_plans()
-#            context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends, 'currentuser': currentuser, 'plan_list': plan_list, 'list_title':'All available plans' })
-#            return render_to_response('travelplans/view_plans.html',context_instance=context)
-            #return redirect('/travelplans')
-            user_name=currentuser.name.split()
+
             facebookid=currentuser.id
-            currentuser=User.objects.filter(username__exact=facebookid)
-            print "facebookid"
-            print facebookid
-            if len(currentuser)==0:
-                currentuser=User.objects.create_user(username=facebookid,password='',first_name=user_name[0],last_name=user_name[1])  
-            else:
-                currentuser=currentuser[0]
-            currentuser=authenticate(username=facebookid,password='')
-            if currentuser is not None: 
-                if currentuser.is_active:
-                    login(request,currentuser)
-            else:
-                print "user None"
-            return redirect('travelplans/')
+            usersocialauth=UserSocialAuth.objects.filter(uid__exact=facebookid)
+            if len(usersocialauth)>0:
+                currentuser=User.objects.filter(id__exact=usersocialauth[0].user_id)
+                if len(currentuser)==1:
+                    currentuser=currentuser[0]
+                    currentuser.backend = 'django.contrib.auth.backends.ModelBackend'
+                    if currentuser and currentuser.is_active:
+                        login(request,currentuser)
+                        return redirect('travelplans/')
+                    else:
+                        print "None currentuser"
 
             '''
             context = RequestContext(request, {'request': request, 'user': request.user, 'friends': friends, 'currentuser': currentuser})
