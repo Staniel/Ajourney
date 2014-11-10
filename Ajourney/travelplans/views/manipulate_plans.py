@@ -23,13 +23,13 @@ def create_plan(request):
             if not isinstance(new_plan.limit, int) or new_plan.limit <= 1:
                 new_plan.limit = 2
             new_plan.save()
+            print "create one"
             return redirect("travelplans:view_my_plans")
     except Exception as e:
-            return e
+            return HttpResponse(str(e))
 def edit_plan(request, plan_id):
-    
     plan = get_object_or_404(Plan, pk=plan_id)
-    if editable(request.user, plan):
+    if request.user.is_authenticated() and editable(request.user, plan):
         plan.destination = request.POST.get('editdestination', "nonedestination");
         plan.description = request.POST.get('editdescription', "nonedestination");
         plan.depart_time = request.POST.get('editdepart', datetime.today())
@@ -38,5 +38,8 @@ def edit_plan(request, plan_id):
         plan.save()
         return redirect("travelplans:view_plan_detail", planid = plan_id)
 
-def delete_plan(request):
-    return HttpResponse("delete plans")
+def delete_plan(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    if request.user.is_authenticated() and editable(request.user, plan):
+        plan.delete()
+    return redirect("travelplans:view_my_plans")

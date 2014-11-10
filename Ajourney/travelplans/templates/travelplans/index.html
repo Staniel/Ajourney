@@ -44,9 +44,9 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul id="plantab" class="nav navbar-nav">
-              <li id="allplan"><a href="#">All Plans</a></li>
-              <li id="myplan"><a href="#">My Plans</a></li>
-              <li id="jplan"><a href="#">Joined Plans</a></li>
+              <li id="allplan"><a href="{% url 'travelplans:view_plans' %}">All Plans</a></li>
+              <li id="myplan"><a href="{% url 'travelplans:view_my_plans' %}">My Plans</a></li>
+              <li id="jplan"><a href="{% url 'travelplans:view_joined_plans' %}">Joined Plans</a></li>
               <li id="createplan"><a href="#" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

@@ -3,23 +3,9 @@ from django.template import RequestContext, loader
 from travelplans.plan_manager import get_plans_by_destination,get_all_plans,get_plan_by_id
 from django.shortcuts import render,redirect
 
-
-def view_plans(request):
-    try:
-        plan_list=get_all_plans()
-        template = loader.get_template('travelplans/view_plans.html')
-        context = RequestContext(request, {
-            'plan_list': plan_list,
-            'list_title': "All Available Plans",
-        })
-        return HttpResponse(template.render(context))
-    except Exception as e:
-        return e
-
-
 def available_plans(request):
 	plan_list=get_all_plans()
-	template = loader.get_template('travelplans/planlist.html')
+	template = loader.get_template('travelplans/view_plans.html')
 	context = RequestContext(request, {
         'plan_list': plan_list,
         'list_title': "All Available Plans",
@@ -28,7 +14,7 @@ def available_plans(request):
 
 def my_plans(request):
     plan_list=get_all_plans()
-    template = loader.get_template('travelplans/planlist.html')
+    template = loader.get_template('travelplans/view_plans.html')
     context = RequestContext(request, {
         'plan_list': plan_list,
         'list_title': "All My Plans",
@@ -37,7 +23,7 @@ def my_plans(request):
 
 def joined_plans(request):
     plan_list=get_all_plans()
-    template = loader.get_template('travelplans/planlist.html')
+    template = loader.get_template('travelplans/view_plans.html')
     context = RequestContext(request, {
         'plan_list': plan_list,
         'list_title': "All Joined Plans",
