@@ -11,12 +11,14 @@
 	<div class="col-md-7" style="">
 		{% ifequal sharable True %}
 		<div class="row">
-			<p><button class="btn btn-primary pull-right">Share Plan</button></p>
+			<p><button class="btn btn-primary pull-right" data-toggle="modal" data-target="#sharePlanModal">Share Plan
+			</button></p>
 		</div>
 		<br/>
 			{% ifequal joinable True %}
 				<div class="row">
-					<p><button class="btn btn-primary pull-right">Join Plan</button></p>
+					<p><button class="btn btn-primary pull-right" data-toggle="modal" data-target="#joinPlanModal">Join Plan
+					</button></p>
 				</div>
 				<br/>
 			{% endifequal %}
@@ -44,7 +46,7 @@
 
 <div class="row" style="padding-top:50px">
 	<p class="bg-info" style="font-size:20px; padding-top:50px; padding-left:20px; padding-right:20px; padding-bottom:50px">
-	Plan Owner: {{plan.holder}}
+	Plan Owner: {{plan.holder.first_name}} {{plan.holder.last_name}}
 	<br/>
 	Destination: {{plan.destination}}
 	<br/> 
@@ -54,7 +56,17 @@
 	<br/> 
 	Description: {{plan.description}}
 	<br/>
-	Max Traveller: {{plan.limit}}
+	Max Travellers: {{plan.limit}}
+	<br/>
+	Already Joined Travellers: 
+	{% if joiners.0 %}
+		{% for joiner in joiners %}
+		{{joiner.first_name}} {{joiner.last_name}},
+		{% endfor %}
+	{% endif %}
+	{% if not joiners.0 %}
+	None
+	{% endif %}
 	</p>
 </div>
 
@@ -111,6 +123,46 @@
         	{% csrf_token %}
         <p> Are you sure you want to delete this plan? </p>
             <button id="deletebutton" type="submit" class="btn btn-primary">Yes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- Modal -->
+
+ <div class="modal fade" id="joinPlanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Join Plan</h4>
+      </div>
+      <div class="modal-body">
+        <form id="joinform" role="form" action="{% url 'travelplans:delete_plan' plan.id%}" method="post">
+        	{% csrf_token %}
+        <p> Do you want to join this plan? </p>
+            <button id="joinbutton" type="submit" class="btn btn-primary">Yes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- Modal -->
+
+ <div class="modal fade" id="sharePlanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Share Plan at Facebook</h4>
+      </div>
+      <div class="modal-body">
+        <form id="shareform" role="form" action="{% url 'travelplans:delete_plan' plan.id%}" method="post">
+        	{% csrf_token %}
+         <label for="sharecomment">Sharing comment</label>
+ <textarea class="editinput form-control" name="sharecomment" id="sharecomment" row="3">Hey there is a travelling to {{plan.destination}} between {{plan.depart_time| date:"m-d-Y"}} and {{plan.return_time| date:"m-d-Y"}}. Do you want to join? Let's hang out! 
+ </textarea>
+            <button id="joinbutton" type="submit" class="btn btn-primary">Yes</button>
         </form>
       </div>
     </div>
