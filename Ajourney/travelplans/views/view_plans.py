@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from travelplans.plan_manager import get_plans_by_destination,get_all_plans,get_plan_by_id
+from travelplans.plan_manager import get_plans_by_destination,get_all_plans,get_plan_by_id,viewable,sharable,editable,joinable
 from django.shortcuts import render,redirect
 
 
@@ -15,10 +15,15 @@ def view_plans(request):
 
 
 def available_plans(request):
+    user=request.user
 	plan_list=get_all_plans()
+    available_plans=[]
+    for plan in plan_list:
+        if viewable(user,plan):
+            available_plans.append(plan)
 	template = loader.get_template('travelplans/planlist.html')
 	context = RequestContext(request, {
-        'plan_list': plan_list,
+        'plan_list': available_plans,
         'list_title': "All Available Plans",
     })
 	return HttpResponse(template.render(context))
