@@ -21,10 +21,14 @@ def create_plan(request):
             new_plan.limit = request.POST.get('limit', 2)
             new_plan.save()
             return HttpResponse("true");
+        else:
+            redirect('login')
     except Exception as e:
             return HttpResponse("error: "+str(e))
 def edit_plan(request, plan_id):
     try:    
+        if not request.user.is_authenticated():
+            return redirect('login')
         plan = get_object_or_404(Plan, pk=plan_id)
         pm=PlanManager()
         if request.user.is_authenticated() and pm.editable(request.user, plan):
@@ -42,6 +46,8 @@ def edit_plan(request, plan_id):
 
 def delete_plan(request, plan_id):
     try:
+        if not user.is_authenticated():
+            return redirect('login')
         plan = get_object_or_404(Plan, pk=plan_id)
         pm = PlanManager()
         if request.user.is_authenticated() and pm.editable(request.user, plan):

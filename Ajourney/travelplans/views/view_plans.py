@@ -5,6 +5,8 @@ from django.shortcuts import render,redirect
 
 def available_plans(request):
     user=request.user
+    if not user.is_authenticated():
+        return redirect('login')
     pm=PlanManager()
     available_plans=pm.get_all_available_plans(user)
     template = loader.get_template('travelplans/view_plans.html')
@@ -16,6 +18,8 @@ def available_plans(request):
 
 def my_plans(request):
     user=request.user
+    if not user.is_authenticated():
+        return redirect('login')
     pm=PlanManager()
     my_plans=pm.get_plans_by_user(user)
     template = loader.get_template('travelplans/view_plans.html')
@@ -27,6 +31,8 @@ def my_plans(request):
 
 def joined_plans(request):
     user=request.user
+    if not user.is_authenticated():
+        return redirect('login')
     pm=PlanManager()
     joined_plans=pm.get_joined_plans(user)
     template = loader.get_template('travelplans/view_plans.html')
@@ -38,6 +44,8 @@ def joined_plans(request):
 
 def view_plan_detail(request,planid):
     user=request.user
+    if not user.is_authenticated():
+        return redirect('login')
     pm=PlanManager()
     plan=pm.get_plan_by_id(planid)
     if plan and pm.viewable(user,plan):
