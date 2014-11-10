@@ -138,7 +138,7 @@
         <h4 class="modal-title" id="myModalLabel">Join Plan</h4>
       </div>
       <div class="modal-body">
-        <form id="joinform" role="form" action="{% url 'travelplans:delete_plan' plan.id%}" method="post">
+        <form id="joinform" role="form" name="{% url 'travelplans:share_plan' plan.id%}" method="post">
         	{% csrf_token %}
         <p> Do you want to join this plan? </p>
             <button id="joinbutton" type="submit" class="btn btn-primary">Yes</button>
@@ -157,16 +157,26 @@
         <h4 class="modal-title" id="myModalLabel">Share Plan at Facebook</h4>
       </div>
       <div class="modal-body">
-        <form id="shareform" role="form" action="{% url 'travelplans:delete_plan' plan.id%}" method="post">
+        <form id="shareform" role="form" name="{% url 'travelplans:share_plan' plan.id%}" method="post">
         	{% csrf_token %}
          <label for="sharecomment">Sharing comment</label>
  <textarea class="editinput form-control" name="sharecomment" id="sharecomment" row="3">Hey there is a travelling to {{plan.destination}} between {{plan.depart_time| date:"m-d-Y"}} and {{plan.return_time| date:"m-d-Y"}}. Do you want to join? Let's hang out! 
  </textarea>
-            <button id="joinbutton" type="submit" class="btn btn-primary">Yes</button>
+            <button id="sharebutton" type="submit" class="btn btn-primary">Yes</button>
         </form>
       </div>
     </div>
   </div>
 </div>
+<script>
+	// var dtime = 
+	// var rtime = 
+	// var dtime_list = dtime.split('-');
+	// var rtime_list = rtime.split('-');
+	// var a = new Date(dtime_list[2], dtime_list[0]-1, dtime_list[1]);
+	// var b = new Date(rtime_list[2], rtime_list[0]-1, rtime_list[1]);
+	// $("#editdepart").val(a.toISOString().substring(0, 10));
+	// $("#editdepart").val(b.toISOString().substring(0, 10));
+</script>
  <!-- Modal -->
 {% endblock %}

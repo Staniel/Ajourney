@@ -105,6 +105,24 @@ $(document).ready(function(){
         }
        });
     });
+        $('#sharebutton').click(function(e){
+        var postData = $("#shareform").serializeArray();
+       var formURL = $("#shareform").attr("name");
+       $.ajax({
+        url: formURL,
+        type: "POST",
+        data: postData,
+        success:function(data){
+            if (data.indexOf("error") > -1)
+                alert(data);
+            else 
+                
+                {alert("success");location.reload();}
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+       });
+    });
 
       $('#searchbutton').click(function(e){
         e.preventDefault();

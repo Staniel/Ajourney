@@ -32,8 +32,11 @@ def all_friends(user):
 			friend_list.append(FBuser(friends_json[i]['id'],friends_json[i]['name']))
 	return friend_list
 
-def share_plan(user, plan, comment):
-    social_user = user.social_auth.filter( provider='facebook',).first()
-    graph = facebook.GraphAPI(social_user.extra_data['access_token'])
-    graph.put_object('me', 'feed', message = comment)
-    return True
+def share_plan_action(user, plan, comment):
+    try:
+    	social_user = user.social_auth.filter( provider='facebook',).first()
+    	graph = facebook.GraphAPI(social_user.extra_data['access_token'])
+    	graph.put_object('me', 'feed', message = comment)
+    	return True
+    except Exception as e:
+    	raise e
