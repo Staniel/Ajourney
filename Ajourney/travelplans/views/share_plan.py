@@ -6,7 +6,7 @@ def share_plan(request, plan_id):
 	try:
 		user = request.user
 		if not user.is_authenticated():
-        	return redirect('login')
+			return redirect('login')
 		URL = ""
 		pm = PlanManager()
 		comment = request.POST.get('sharecomment', "")

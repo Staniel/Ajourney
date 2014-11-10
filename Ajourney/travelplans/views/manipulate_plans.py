@@ -25,6 +25,7 @@ def create_plan(request):
             redirect('login')
     except Exception as e:
             return HttpResponse("error: "+str(e))
+            
 def edit_plan(request, plan_id):
     try:    
         if not request.user.is_authenticated():
