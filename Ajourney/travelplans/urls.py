@@ -14,6 +14,6 @@ urlpatterns = patterns('',
     url(r'^edit_plan/(?P<plan_id>\d+)$', manipulate_plans.edit_plan, name='edit_plan'),
     url(r'^delete_plan/(?P<plan_id>\d+)$', manipulate_plans.delete_plan, name='delete_plan'),
 
-    # url(r'^join_plan$', join_plan.join_plan, name='join_plan'),
+    url(r'^join_plan(?P<plan_id>\d+)$', join_plan.join_plan, name='join_plan'),
     url(r'^share_plan(?P<plan_id>\d+)$', share_plan.share_plan, name='share_plan'),
 )

@@ -137,7 +137,7 @@
         <h4 class="modal-title" id="myModalLabel">Join Plan</h4>
       </div>
       <div class="modal-body">
-        <form id="joinform" role="form" name="{% url 'travelplans:share_plan' plan.id%}" method="post">
+        <form id="joinform" role="form" name="{% url 'travelplans:join_plan' plan.id%}" method="post">
         	{% csrf_token %}
         <p> Do you want to join this plan? </p>
             <button id="joinbutton" type="submit" class="btn btn-primary">Yes</button>
