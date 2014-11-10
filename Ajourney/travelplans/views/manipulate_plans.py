@@ -20,22 +20,32 @@ def create_plan(request):
             new_plan.return_time = request.POST.get('returntime', datetime.today())
             new_plan.limit = request.POST.get('limit', 2)
             new_plan.save()
-            return redirect("travelplans:view_my_plans")
+            return HttpResponse("true");
     except Exception as e:
-            return HttpResponse(e)
+            return HttpResponse("error: "+str(e))
 def edit_plan(request, plan_id):
-    plan = get_object_or_404(Plan, pk=plan_id)
-    if request.user.is_authenticated() and editable(request.user, plan):
-        plan.destination = request.POST.get('editdestination', "nonedestination");
-        plan.description = request.POST.get('editdescription', "nonedestination");
-        plan.depart_time = request.POST.get('editdepart', datetime.today())
-        plan.return_time = request.POST.get('editreturn', datetime.today())
-        plan.limit = request.POST.get('editlimit', 2)
-        plan.save()
-        return redirect("travelplans:view_plan_detail", planid = plan_id)
+    try:    
+        plan = get_object_or_404(Plan, pk=plan_id)
+        if request.user.is_authenticated() and editable(request.user, plan):
+            plan.destination = request.POST.get('editdestination', "nonedestination");
+            plan.description = request.POST.get('editdescription', "nonedestination");
+            plan.depart_time = request.POST.get('editdepart', datetime.today())
+            plan.return_time = request.POST.get('editreturn', datetime.today())
+            plan.limit = request.POST.get('editlimit', 2)
+            plan.save()
+            return HttpResponse("true")
+        else:
+            return HttpResponse("error: not editable")
+    except Exception as e:
+        return HttpResponse("error: "+str(e))
 
 def delete_plan(request, plan_id):
-    plan = get_object_or_404(Plan, pk=plan_id)
-    if request.user.is_authenticated() and editable(request.user, plan):
-        plan.delete()
-    return redirect("travelplans:view_my_plans")
+    try:
+        plan = get_object_or_404(Plan, pk=plan_id)
+        if request.user.is_authenticated() and editable(request.user, plan):
+            plan.delete()
+            return HttpResponse("true")
+        else:
+            return HttpResponse("error: not editable")
+    except Exception as e:
+        return HttpResponse("error: "+str(e))
