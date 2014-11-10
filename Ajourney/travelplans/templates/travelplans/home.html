@@ -44,29 +44,12 @@
             </button>
             <a class="navbar-brand" href="" style="color:white">AJourney</a>
           </div>
-          <!--<div class="navbar-collapse collapse">
-            <ul id="plantab" class="nav navbar-nav">
-              <li id="allplan"><a href="#">All Plans</a></li>
-              <li id="myplan"><a href="#">My Plans</a></li>
-              <li id="jplan"><a href="#">Joined Plans</a></li>
-              <li id="createplan"><a href="#" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url 'auth:logout' %}?next={{ '/' }}">Logout </a></li>  
-            </ul>
-          </div>/.nav-collapse -->
 
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
          <p>
           <ul>
-            <!--<li>
-              <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
-            </li>
-            <li>
-                <a href='/admin'>Login as administrator</a>
-            </li>-->
             <form action='/admin'>
                 <input type="submit" value="Login as administrator">
             </form>
@@ -78,7 +61,6 @@
       </div>
     </div>
   </div>
- <!-- Modal -->
 
   </body>
   
