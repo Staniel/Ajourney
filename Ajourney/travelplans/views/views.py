@@ -31,8 +31,7 @@ def home(request):
             url = u'https://graph.facebook.com/{0}/' \
                 u'friends?fields=id,name,location,picture' \
                 u'&access_token={1}'.format(social_user.uid,
-            social_user.extra_data['access_token'],
-        )
+            social_user.extra_data['access_token'],)
             response = urllib2.Request(url)
             friends_json = json.loads(urllib2.urlopen(response).read()).get('data')
             friends = []
