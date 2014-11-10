@@ -116,7 +116,7 @@ FACEBOOK_APP_SECRET = "d169d0731b524d2194061096d97a0fc7"
 
 SOCIAL_AUTH_FACEBOOK_KEY              = '1479318365667083'
 SOCIAL_AUTH_FACEBOOK_SECRET           = 'd169d0731b524d2194061096d97a0fc7'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['public_profile','email','user_friends']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['public_profile','email','user_friends','publish_actions']
 
 LOGIN_REDIRECT_URL = '/travelplans/'
 
