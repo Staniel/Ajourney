@@ -126,7 +126,7 @@ $(document).ready(function() {
                 if (data.indexOf("error") > -1)
                     alert(data);
                 else {
-                    // alert("success");
+                    alert("success");
                     location.reload();
                 }
             },
@@ -146,7 +146,7 @@ $(document).ready(function() {
                 if (data.indexOf("error") > -1)
                     alert(data);
                 else {
-                    // alert("success");
+                    alert("success");
                     location.reload();
                 }
             },
@@ -166,7 +166,7 @@ $(document).ready(function() {
                 if (data.indexOf("error") > -1)
                     alert(data);
                 else {
-                    // alert("success");
+                    alert("success");
                     location.reload();
                 }
             },
