@@ -1,4 +1,4 @@
-URLBase = "http://localhost:8000/travelplans/";
+URLBase = "http://localhost:8080/travelplans/";
 $(document).ready(function() {
     $.validator.addMethod("greaterThan",
         function(value, element, params) {

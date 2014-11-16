@@ -48,6 +48,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'travelplans.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'Ajourney.urls'
@@ -70,7 +71,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Ajourney',
         'USER': 'root',
-        'PASSWORD': 'ru4jp6qu/6',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
