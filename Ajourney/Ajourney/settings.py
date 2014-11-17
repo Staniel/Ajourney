@@ -96,6 +96,7 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
 )
 
+
 # AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -124,3 +125,5 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['public_profile','email','user_friends','publish_a
 LOGIN_REDIRECT_URL = '/travelplans/'
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = "/home/django/Ajourney/travelplans/static/"

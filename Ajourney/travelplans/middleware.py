@@ -1,7 +1,7 @@
 from social.apps.django_app.middleware import SocialAuthExceptionMiddleware
 from django.shortcuts import render
 from social.exceptions import AuthCanceled, AuthFailed, AuthUnknownError, AuthTokenError, AuthMissingParameter, AuthStateMissing, AuthStateForbidden, AuthAlreadyAssociated, AuthTokenRevoked, AuthForbidden
-from requests.exceptions import (ConnectionError, ConnectTimeout, ReadTimeout, SSLError, ProxyError)
+from requests.exceptions import (ConnectionError)#, ConnectTimeout, ReadTimeout, SSLError, ProxyError)
 
 class SocialAuthExceptionMiddleware(SocialAuthExceptionMiddleware):
     def process_exception(self, request, exception):
@@ -27,8 +27,8 @@ class SocialAuthExceptionMiddleware(SocialAuthExceptionMiddleware):
             return render(request, "travelplans/error.html", {})
         elif type(exception) == ConnectionError:
             return render(request, "travelplans/conn_error.html", {})
-        elif type(exception) == ConnectTimeout:
-            return render(request, "travelplans/conn_error.html", {})
+#        elif type(exception) == ConnectTimeout:
+#            return render(request, "travelplans/conn_error.html", {})
         else:
             pass
             
