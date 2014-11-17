@@ -7,7 +7,7 @@ def share_plan(request, plan_id):
 		user = request.user
 		if not user.is_authenticated():
 			return redirect('login')
-		URL = ""
+		URL = " http://104.236.26.136/travelplans/view_plan_detail/"+str(plan_id)+"/"
 		pm = PlanManager()
 		comment = request.POST.get('sharecomment', "")
 		
