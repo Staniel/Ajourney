@@ -1,4 +1,4 @@
-URLBase = "http://localhost:8000/travelplans/";
+URLBase = "http://104.236.26.136/travelplans/";
 $(document).ready(function() {
     // $("#editdepartid").focus(function(){
     //     if ($(this).attr("value") != undefined){
