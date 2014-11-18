@@ -24,6 +24,7 @@
               <li id="myplan"><a href="{% url 'travelplans:view_my_plans' %}">My Plans</a></li>
               <li id="jplan"><a href="{% url 'travelplans:view_joined_plans' %}">Joined Plans</a></li>
               <li id="createplan"><a href="#" data-toggle="modal" data-target="#createNewPlanModal"> Create New Plan </a></li>
+	      <li id="help"><a href="{% url 'travelplans:help' %}">Help</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#">Welcome, {{user.first_name}}</a></li>
