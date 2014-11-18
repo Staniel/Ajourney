@@ -11,3 +11,5 @@ urlpatterns = patterns('',
 	url('', include('social.apps.django_app.urls', namespace='social')),
 	url(r'^', 'travelplans.views.error_views.error_view',name='error_view'),
 )
+
+handler404 = 'travelplans.views.error_views.error_view'

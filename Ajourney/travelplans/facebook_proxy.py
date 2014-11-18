@@ -46,10 +46,8 @@ def get_picture_url(user):
     try:
         if social_user:
             graph = facebook.GraphAPI(social_user.extra_data['access_token'])
-            profile = graph.get_object("me/picture")
+            profile = graph.get_object('/me/picture')
             user_picture_url = profile['url']
-            #print 'user_picture'
-            #print user_picture_url
             return user_picture_url
         else:
             return ''
