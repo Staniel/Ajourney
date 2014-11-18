@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect,render_to_response
 from django.contrib.auth import logout
 
 def available_plans(request):
-    try:
+#    try:
         user=request.user
         if not user.is_authenticated():
             return redirect('login')
@@ -17,9 +17,9 @@ def available_plans(request):
             'list_title': "All Available Plans",
         })
         return HttpResponse(template.render(context))
-    except:
-        logout(request)
-        return render_to_response('travelplans/login.html')
+#    except:
+#        logout(request)
+#        return render_to_response('travelplans/login.html')
 
 def my_plans(request):
     user=request.user
