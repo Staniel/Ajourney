@@ -1,5 +1,5 @@
 from travelplans.models import Plan,JoinedPlan
-from facebook_proxy import is_friend,all_friends
+from facebook_proxy import is_friend
 
 class PlanManager(object):
 	

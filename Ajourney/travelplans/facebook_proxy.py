@@ -7,16 +7,13 @@ class FBuser:
         self.id = FBid
         self.name = name
 
-
-def is_friend(user_a, user_b):
-	social_user_b = user_b.social_auth.filter( provider='facebook',).first()
-	if social_user_b:
-		graph = facebook.GraphAPI(social_user_b.extra_data['access_token'])
-		profile_b = graph.get_object("me")
-		user_b_facebookid = profile_b['id']
-		if user_b_facebookid in all_friends(user_a):
-			return True
-	return False
+def is_friend(user_a,user_b):
+    friend_list=all_friends(user_a)
+    if len(friend_list)>0:
+        if user_b.social_auth:
+            if user_b.social_auth.uid in friend_list:
+                return True
+    return False
 
 def all_friends(user):
 	friend_list=[]
