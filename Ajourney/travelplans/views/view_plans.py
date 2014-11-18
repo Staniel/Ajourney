@@ -70,3 +70,8 @@ def view_plan_detail(request,planid):
     except:
         logout(request)
         return render_to_response('travelplans/login.html')
+        
+def help(request):
+    template = loader.get_template('travelplans/help.html')
+    context = RequestContext(request)
+    return HttpResponse(template.render(context))

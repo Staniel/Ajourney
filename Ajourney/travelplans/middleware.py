@@ -28,8 +28,8 @@ class SocialAuthExceptionMiddleware(SocialAuthExceptionMiddleware):
             return render(request, "travelplans/error.html", {})
         elif type(exception) == ConnectionError:
             return render(request, "travelplans/conn_error.html", {})
-#        elif type(exception) == ConnectTimeout:
-#            return render(request, "travelplans/conn_error.html", {})
+        elif type(exception) == ConnectTimeout:
+            return render(request, "travelplans/conn_error.html", {})
         else:
             pass
         '''
