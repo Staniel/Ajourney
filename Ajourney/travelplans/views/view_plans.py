@@ -3,6 +3,7 @@ from django.template import RequestContext, loader
 from travelplans.plan_manager import PlanManager
 from django.shortcuts import render,redirect,render_to_response
 from django.contrib.auth import logout
+from travelplans.facebook_proxy import get_picture_url
 
 def available_plans(request):
     try:
@@ -54,6 +55,10 @@ def view_plan_detail(request,planid):
             return redirect('login')
         pm=PlanManager()
         plan=pm.get_plan_by_id(planid)
+        if plan.holder.first_name is '':
+            picture_url = ""
+        else:
+            picture_url=get_picture_url(plan.holder)
         if plan and pm.viewable(user,plan):
             template = loader.get_template('travelplans/plan_detail.html')
             context = RequestContext(request, {
@@ -63,6 +68,7 @@ def view_plan_detail(request,planid):
             'joinable':pm.joinable(user,plan),
             'joiners':pm.get_all_joiners(plan),
             'has_joined':pm.has_joined_plan(user,plan),
+            'picture_url':picture_url,
             })
             return HttpResponse(template.render(context))
         else:
@@ -70,7 +76,31 @@ def view_plan_detail(request,planid):
     except:
         logout(request)
         return render_to_response('travelplans/login.html')
-        
+    '''
+        user=request.user
+        if not user.is_authenticated():
+            return redirect('login')
+        pm=PlanManager()
+        plan=pm.get_plan_by_id(planid)
+        if plan.holder.first_name is '':
+            picture_url = 
+        else:
+            picture_url=get_picture_url(plan.holder)
+        if plan and pm.viewable(user,plan):
+            template = loader.get_template('travelplans/plan_detail.html')
+            context = RequestContext(request, {
+            'plan': plan,
+            'editable':pm.editable(user,plan),
+            'sharable':pm.sharable(user,plan),
+            'joinable':pm.joinable(user,plan),
+            'joiners':pm.get_all_joiners(plan),
+            'has_joined':pm.has_joined_plan(user,plan),
+            'picture_url':picture_url,
+            })
+            return HttpResponse(template.render(context))
+        else:
+            return HttpResponse("This plan is not available.")
+    '''    
 def help(request):
     template = loader.get_template('travelplans/help.html')
     context = RequestContext(request)

@@ -40,10 +40,13 @@ def share_plan_action(user, plan, comment):
 
 def get_picture_url(user):
     social_user = user.social_auth.filter( provider='facebook',).first()
-    if social_user:
-        graph = facebook.GraphAPI(social_user.extra_data['access_token'])
-        profile = graph.get_object("me")
-        user_picture_url = profile_b['picture']
-        return user_picture_url
-    else:
-        return ''
+    try:
+        if social_user:
+            graph = facebook.GraphAPI(social_user.extra_data['access_token'])
+            profile = graph.get_object('/me/picture')
+            user_picture_url = profile['url']
+            return user_picture_url
+        else:
+            return ''
+    except Exception as e:
+        print e.message
