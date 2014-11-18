@@ -1,9 +1,21 @@
 URLBase = "http://localhost:8000/travelplans/";
 $(document).ready(function() {
+    // $("#editdepartid").focus(function(){
+    //     if ($(this).attr("value") != undefined){
+    //         $(this).removeAttr("value");
+    //     }
+    // }
+    //     );
+    // $("#editreturn").focus(function(){
+    //     if ($(this).attr("value")!= undefined){
+    //         $(this).removeAttr("value");
+    //     }
+    // }
+    //     );
     $.validator.addMethod("greaterThan",
         function(value, element, params) {
             if (!/Invalid|NaN/.test(new Date(value))) {
-                return new Date(value) > new Date($(params).val());
+                return new Date(value) >= new Date($(params).val());
             }
             return isNaN(value) && isNaN($(params).val()) || (Number(value) > Number($(params).val()));
         }, 'return time must be greater than depart time.');
@@ -55,10 +67,10 @@ $(document).ready(function() {
             editdestination: {
                 required: true
             },
-            editdeparttime: {
+            editdepart: {
                 required: true,
             },
-            editreturntime: {
+            editreturn: {
                 required: true,
                 greaterThan: "#editdepartid"
             },
