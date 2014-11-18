@@ -6,7 +6,7 @@ from requests.exceptions import (ConnectionError)#, ConnectTimeout, ReadTimeout,
 class SocialAuthExceptionMiddleware(SocialAuthExceptionMiddleware):
     def process_exception(self, request, exception):
         if type(exception) == AuthCanceled:
-            return render(request, "travelplans/error.html", {})
+            return render(request, "travelplans/login.html", {})
         elif type(exception) == AuthFailed:
             return render(request, "travelplans/error.html", {})
         elif type(exception) == AuthUnknownError:
