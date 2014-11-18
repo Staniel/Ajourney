@@ -8,10 +8,15 @@ class FBuser:
         self.name = name
 
 def is_friend(user_a,user_b):
+    if not user_a or not user_b:
+        return False
     friend_list=all_friends(user_a)
     if len(friend_list)>0:
-        if user_b.social_auth:
-            if user_b.social_auth.uid in friend_list:
+        social_user_b = user_b.social_auth.filter(provider = 'facebook').first()
+        if social_user_b:
+	    print "social_auth"
+	    print social_user_b
+	    if social_user_b.uid in friend_list:
                 return True
     return False
 
