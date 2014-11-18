@@ -56,7 +56,7 @@ def view_plan_detail(request,planid):
         pm=PlanManager()
         plan=pm.get_plan_by_id(planid)
         if plan.holder.first_name is '':
-            picture_url = "{% static 'travelplans/sample.jpg' %}"
+            picture_url = ""
         else:
             picture_url=get_picture_url(plan.holder)
         if plan and pm.viewable(user,plan):
