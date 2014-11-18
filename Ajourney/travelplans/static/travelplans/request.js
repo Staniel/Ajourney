@@ -1,17 +1,12 @@
 URLBase = "http://104.236.26.136/travelplans/";
 $(document).ready(function() {
-    // $("#editdepartid").focus(function(){
-    //     if ($(this).attr("value") != undefined){
-    //         $(this).removeAttr("value");
-    //     }
-    // }
-    //     );
-    // $("#editreturn").focus(function(){
-    //     if ($(this).attr("value")!= undefined){
-    //         $(this).removeAttr("value");
-    //     }
-    // }
-    //     );
+    $.validator.addMethod(
+"regex",
+function(value, element) {
+    return this.optional(element) || !(/:|\?|\$|\%|\&|\/|\\|\*|\"|<|>|\||%/g.test(value));
+},
+    "Illegal character are not allowed.");
+
     $.validator.addMethod("greaterThan",
         function(value, element, params) {
             if (!/Invalid|NaN/.test(new Date(value))) {
@@ -22,7 +17,8 @@ $(document).ready(function() {
     $('#createform').validate({
         rules: {
             destination: {
-                required: true
+                required: true,
+                regex: true
             },
             departtime: {
                 required: true,
@@ -65,7 +61,8 @@ $(document).ready(function() {
     $('#editform').validate({
         rules: {
             editdestination: {
-                required: true
+                required: true,
+                regex: true
             },
             editdepart: {
                 required: true,
