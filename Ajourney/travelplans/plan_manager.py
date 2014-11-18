@@ -68,7 +68,6 @@ class PlanManager(object):
 
 	def viewable(self,user,plan):
 		isfriend=is_friend(user,plan.holder)
-		print isfriend
 		if user.is_superuser or plan.holder.is_superuser or user==plan.holder or isfriend:
 			return True
 		else:

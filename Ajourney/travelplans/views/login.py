@@ -25,27 +25,21 @@ def facebook_login(request):
             # for i in xrange(len(friends_json)):
             #     friends.append(FBuser(friends_json[i]['id'],friends_json[i]['name']))
             try:
-                print "1"
                 graph = facebook.GraphAPI(social_user.extra_data['access_token'])
                 profile = graph.get_object("me")
-                print profile
                 currentuser = FBuser(profile['id'],profile['name'])
 
                 facebookid=currentuser.id
-                print "2"
                 usersocialauth=UserSocialAuth.objects.filter(uid__exact=facebookid)
                 if len(usersocialauth)>0:
-                    print "3"
                     currentuser=User.objects.filter(id__exact=usersocialauth[0].user_id)
                     if len(currentuser)==1:
                         currentuser=currentuser[0]
-                        print "4"
                         currentuser.backend = 'django.contrib.auth.backends.ModelBackend'
                         if currentuser and currentuser.is_active:
                             login(request,currentuser)
                             return redirect('travelplans/')
             except:
-                print "5"
                 logout(request)
                 return render_to_response('travelplans/login.html')
     context = RequestContext(request, {'request': request, 'user': request.user})

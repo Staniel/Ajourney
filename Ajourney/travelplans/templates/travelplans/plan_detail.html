@@ -30,7 +30,7 @@
       <span class="label label-warning">{{plan.depart_time| date:"m-d-Y"}}</span> To
       <span class="label label-warning">{{plan.return_time| date:"m-d-Y"}}</span>
       </h3>
-    <h4>Created By <span class="label label-success">{{plan.holder}}</span></h4>
+    <h4>Created By <span class="label label-success">{{plan.holder.first_name }}{{plan.holder.last_name}}</span></h4>
     <h4><span class="label label-primary">{{plan.limit}}</span> Max Travellers</h4>
     <h4>{% if joiners.0 %}
         {% for joiner in joiners %}

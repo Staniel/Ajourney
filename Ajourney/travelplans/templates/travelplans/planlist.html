@@ -41,7 +41,7 @@
                     <td class="plan_dest"><a href="/travelplans/view_plan_detail/{{plan.id}}/">{{ plan.destination }}</a></td>
                     <td class="plan_dep">{{ plan.depart_time | date:"m-d-Y" }}</td>
                     <td class="plan_ret">{{ plan.return_time | date:"m-d-Y"}}</td>
-                    <td class="plan_holder">{{ plan.holder }}</td>
+                    <td class="plan_holder">{{ plan.holder.first_name }}{{ plan.holder.last_name }}</td>
                     <td class="plan_limit">{{plan.limit}}</td>
                 </tr>
                 {% endfor %}

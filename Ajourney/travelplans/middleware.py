@@ -7,8 +7,9 @@ class SocialAuthExceptionMiddleware(SocialAuthExceptionMiddleware):
     def process_exception(self, request, exception):
         if type(exception) == AuthCanceled:
             return render(request, "travelplans/login.html", {})
-        elif type(exception) == AuthFailed:
-            return render(request, "travelplans/error.html", {})
+        else:
+            return render(request, "travelplans/error.html", {'error_message':exception.message})
+        '''
         elif type(exception) == AuthUnknownError:
             return render(request, "travelplans/error.html", {})
         elif type(exception) == AuthTokenError:
@@ -31,4 +32,6 @@ class SocialAuthExceptionMiddleware(SocialAuthExceptionMiddleware):
 #            return render(request, "travelplans/conn_error.html", {})
         else:
             pass
+        '''
+
             
