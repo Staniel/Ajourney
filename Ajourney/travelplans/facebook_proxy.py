@@ -7,16 +7,18 @@ class FBuser:
         self.id = FBid
         self.name = name
 
-
-def is_friend(user_a, user_b):
-	social_user_b = user_b.social_auth.filter( provider='facebook',).first()
-	if social_user_b:
-		graph = facebook.GraphAPI(social_user_b.extra_data['access_token'])
-		profile_b = graph.get_object("me")
-		user_b_facebookid = profile_b['id']
-		if user_b_facebookid in all_friends(user_a):
-			return True
-	return False
+def is_friend(user_a,user_b):
+    if not user_a or not user_b:
+        return False
+    friend_list=all_friends(user_a)
+    if len(friend_list)>0:
+        social_user_b = user_b.social_auth.filter(provider = 'facebook').first()
+        if social_user_b:
+	    print "social_auth"
+	    print social_user_b
+	    if social_user_b.uid in friend_list:
+                return True
+    return False
 
 def all_friends(user):
 	friend_list=[]
@@ -43,10 +45,13 @@ def share_plan_action(user, plan, comment):
 
 def get_picture_url(user):
     social_user = user.social_auth.filter( provider='facebook',).first()
-    if social_user:
-        graph = facebook.GraphAPI(social_user.extra_data['access_token'])
-        profile = graph.get_object("me")
-        user_picture_url = profile_b['picture']
-        return user_picture_url
-    else:
-        return ''
+    try:
+        if social_user:
+            graph = facebook.GraphAPI(social_user.extra_data['access_token'])
+            profile = graph.get_object('/me/picture')
+            user_picture_url = profile['url']
+            return user_picture_url
+        else:
+            return ''
+    except Exception as e:
+        print e.message

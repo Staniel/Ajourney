@@ -13,7 +13,6 @@ $(document).ready(function() {
                     $(this).hide();
                     return true;
                 }
-                
             }
             if (depart != '') {
                 var filter_date = new Date(depart);
