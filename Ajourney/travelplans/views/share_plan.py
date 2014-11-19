@@ -10,11 +10,12 @@ def share_plan(request, plan_id):
 		URL = " http://104.236.26.136/travelplans/view_plan_detail/"+str(plan_id)+"/"
 		pm = PlanManager()
 		comment = request.POST.get('sharecomment', "")
-		
 		plan = pm.get_plan_by_id(plan_id)
-		if user.is_authenticated() and share_plan_action(user, plan, comment+URL):
+		if plan is None:
+			raise Exception("plan do not exist")
+		if share_plan_action(user, plan, comment+URL):
 			return HttpResponse("true")
 		else:
-			return HttpResponse("error: share plan failed")
+			raise Exception("share plan failed")
 	except Exception as e:
-		return HttpResponse("error: "+str(e))
+		return HttpResponse(str(e), status = 400)

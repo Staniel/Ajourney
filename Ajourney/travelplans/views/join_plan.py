@@ -9,6 +9,8 @@ def join_plan(request, plan_id):
 			return redirect('login')
 		pm = PlanManager()
 		plan = pm.get_plan_by_id(plan_id)
+		if plan is None:
+			raise Exception("plan not exist")
 		if pm.joinable(user, plan):
 			newjoin = JoinedPlan()
 			newjoin.joined_user = user
@@ -16,9 +18,9 @@ def join_plan(request, plan_id):
 			newjoin.save()
 			return HttpResponse("true")
 		else:
-			return HttpResponse("error: unable to join")
+			raise Exception("unable to join")
 	except Exception as e:
-		return HttpResponse("error: "+str(e))
+		return HttpResponse(str(e), status = 400)
 
 def unjoin_plan(request, plan_id):
 	try:
@@ -30,5 +32,5 @@ def unjoin_plan(request, plan_id):
 		joined_plan.delete()
 		return HttpResponse("true")
 	except Exception as e:
-		return HttpResponse("error: "+str(e))
+		return HttpResponse(str(e), status = 400)
 

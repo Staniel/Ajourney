@@ -67,6 +67,8 @@ class PlanManager(object):
 		return available_plans
 
 	def viewable(self,user,plan):
+		if plan is None:
+			return False
 		isfriend=is_friend(user,plan.holder)
 		if user.is_superuser or plan.holder.is_superuser or user==plan.holder or isfriend:
 			return True
@@ -74,18 +76,24 @@ class PlanManager(object):
 			return False
 
 	def editable(self,user,plan):
+		if plan is None:
+			return False
 		if user.is_superuser or user==plan.holder:
 			return True
 		else:
 			return False
 
 	def sharable(self,user,plan):
+		if plan is None:
+			return False
 		if not user.is_superuser:
 			return True
 		else:
 			return False
 
 	def joinable(self,user,plan):
+		if plan is None:
+			return False
 		if user.is_superuser:
 			return False
 		else:

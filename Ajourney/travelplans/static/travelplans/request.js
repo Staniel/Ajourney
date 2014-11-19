@@ -41,12 +41,11 @@ function(value, element) {
                 type: "POST",
                 data: postData,
                 success: function(data) {
-                    if (data.indexOf("error") > -1)
-                        alert(data);
-                    else
                         location.href = URLBase + "my_plans";
                 },
-                error: function(jqXHR, textStatus, errorThrown) {}
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("error: "+jqXHR.responseText);
+                }
             });
         },
         highlight: function(element) {
@@ -85,11 +84,11 @@ function(value, element) {
                 type: "POST",
                 data: postData,
                 success: function(data) {
-                    if (data.indexOf("error") > -1)
-                        alert(data);
                     location.reload();
                 },
-                error: function(jqXHR, textStatus, errorThrown) {}
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("error: "+jqXHR.responseText);
+                }
             });
         },
         highlight: function(element) {
@@ -112,14 +111,11 @@ function(value, element) {
             type: "POST",
             data: postData,
             success: function(data) {
-                if (data.indexOf("error") > -1)
-                    alert(data);
-                else {
                     location.href = URLBase + "my_plans";
-                    // alert("successful delete");
-                }
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error: "+jqXHR.responseText);
+            }
         });
     });
     $('#shareform').submit(function(e) {
@@ -132,14 +128,11 @@ function(value, element) {
             type: "POST",
             data: postData,
             success: function(data) {
-                if (data.indexOf("error") > -1)
-                    alert(data);
-                else {
-                    // alert("success");
                     location.reload();
-                }
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error: "+jqXHR.responseText);
+            }
         });
     });
     $('#joinform').submit(function(e) {
@@ -152,14 +145,11 @@ function(value, element) {
             type: "POST",
             data: postData,
             success: function(data) {
-                if (data.indexOf("error") > -1)
-                    alert(data);
-                else {
-                    // alert("success");
                     location.reload();
-                }
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error: "+jqXHR.responseText);
+            }
         });
     });
     $('#unjoinform').submit(function(e) {
@@ -172,14 +162,11 @@ function(value, element) {
             type: "POST",
             data: postData,
             success: function(data) {
-                if (data.indexOf("error") > -1)
-                    alert(data);
-                else {
-                    // alert("success");
                     location.reload();
-                }
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error: "+jqXHR.responseText);
+            }
         });
     });
 });

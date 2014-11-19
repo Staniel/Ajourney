@@ -11,8 +11,9 @@ $(document).ready(function() {
                 var test_dest = $(this).find('.plan_dest').text().toLowerCase();
                 if (test_dest.indexOf(dest) <= -1) {
                     $(this).hide();
+                    return true;
                 }
-                return true;
+                
             }
             if (depart != '') {
                 var filter_date = new Date(depart);
