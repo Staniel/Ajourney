@@ -1,4 +1,4 @@
-URLBase = "http://104.236.26.136/travelplans/";
+// URLBase = "http://104.236.26.136/travelplans/";
 $(document).ready(function() {
     $.validator.addMethod(
 "regex",
@@ -35,13 +35,13 @@ function(value, element) {
         },
         submitHandler: function(e) {
             var postData = $("#createform").serializeArray();
-            var formURL = $("#createform").attr("name");
+            var formURL = $("#createform").attr("action");
             $.ajax({
                 url: formURL,
                 type: "POST",
                 data: postData,
                 success: function(data) {
-                        location.href = URLBase + "my_plans";
+                        location.href = "http://" + location.host + "/travelplans/my_plans";
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert("error: "+jqXHR.responseText);
@@ -78,7 +78,7 @@ function(value, element) {
         },
         submitHandler: function(e) {
             var postData = $("#editform").serializeArray();
-            var formURL = $("#editform").attr("name");
+            var formURL = $("#editform").attr("action");
             $.ajax({
                 url: formURL,
                 type: "POST",
@@ -105,13 +105,13 @@ function(value, element) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var postData = $("#deleteform").serializeArray();
-        var formURL = $("#deleteform").attr("name");
+        var formURL = $("#deleteform").attr("action");
         $.ajax({
             url: formURL,
             type: "POST",
             data: postData,
             success: function(data) {
-                    location.href = URLBase + "my_plans";
+                    location.href = "http://" + location.host + "/travelplans/my_plans";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert("error: "+jqXHR.responseText);
@@ -122,7 +122,7 @@ function(value, element) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var postData = $("#shareform").serializeArray();
-        var formURL = $("#shareform").attr("name");
+        var formURL = $("#shareform").attr("action");
         $.ajax({
             url: formURL,
             type: "POST",
@@ -139,7 +139,7 @@ function(value, element) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var postData = $("#joinform").serializeArray();
-        var formURL = $("#joinform").attr("name");
+        var formURL = $("#joinform").attr("action");
         $.ajax({
             url: formURL,
             type: "POST",
@@ -156,7 +156,7 @@ function(value, element) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var postData = $("#unjoinform").serializeArray();
-        var formURL = $("#unjoinform").attr("name");
+        var formURL = $("#unjoinform").attr("action");
         $.ajax({
             url: formURL,
             type: "POST",
