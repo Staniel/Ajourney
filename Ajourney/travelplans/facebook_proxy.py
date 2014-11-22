@@ -45,10 +45,14 @@ def get_picture_url(user, holder_id):
     social_user = user.social_auth.filter( provider='facebook',).first()
     try:
         if social_user:
+        #for server only don't know why if use facebook GraphAPI the ?type=large is not work, so I return the id of holder and by id get the profile
+            '''
             graph = facebook.GraphAPI(social_user.extra_data['access_token'])
             profile = graph.get_object('/'+str(holder_id)+'/picture?type=large')
             user_picture_url = profile['url']
             return user_picture_url
+            '''
+            return holder_id
         else:
         #should be error? because the current user should have available token!
             return ''
