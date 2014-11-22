@@ -58,7 +58,8 @@ def view_plan_detail(request,planid):
         if plan.holder.first_name is '':
             picture_url = ""
         else:
-            picture_url=get_picture_url(plan.holder)
+            holder_fb_id = plan.holder.social_auth.filter(provider = 'facebook').first().uid
+            picture_url = get_picture_url(user, holder_fb_id)
         if plan and pm.viewable(user,plan):
             template = loader.get_template('travelplans/plan_detail.html')
             context = RequestContext(request, {
