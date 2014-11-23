@@ -53,12 +53,15 @@ def view_plan_detail(request,planid):
         user=request.user
         if not user.is_authenticated():
             return redirect('login')
-        pm=PlanManager()
+        pm = PlanManager()
         plan=pm.get_plan_by_id(planid)
-        if plan.holder.first_name is '':
-            picture_url = ""
+        if plan.holder.is_superuser:
+            picture_url = ''
         else:
-            picture_url=get_picture_url(plan.holder)
+            holder_fb = plan.holder.social_auth.filter(provider = 'facebook').first()
+            holder_fb_id = holder_fb.uid
+            picture_url = get_picture_url(user, holder_fb_id)
+            
         if plan and pm.viewable(user,plan):
             template = loader.get_template('travelplans/plan_detail.html')
             context = RequestContext(request, {
@@ -76,7 +79,7 @@ def view_plan_detail(request,planid):
     except:
         logout(request)
         return render_to_response('travelplans/login.html')
-    '''
+        '''
         user=request.user
         if not user.is_authenticated():
             return redirect('login')
@@ -100,7 +103,7 @@ def view_plan_detail(request,planid):
             return HttpResponse(template.render(context))
         else:
             return HttpResponse("This plan is not available.")
-    '''    
+        '''    
 def help(request):
     template = loader.get_template('travelplans/help.html')
     context = RequestContext(request)
