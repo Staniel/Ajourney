@@ -1,4 +1,6 @@
-// URLBase = "http://104.236.26.136/travelplans/";
+
+URLBase = "http://localhost:8000/travelplans/";
+
 $(document).ready(function() {
     $.validator.addMethod(
 "regex",
@@ -25,6 +27,7 @@ function(value, element) {
             },
             returntime: {
                 required: true,
+                //name
                 greaterThan: "#newdepart"
             },
             limit: {
@@ -79,6 +82,7 @@ function(value, element) {
         submitHandler: function(e) {
             var postData = $("#editform").serializeArray();
             var formURL = $("#editform").attr("action");
+            console.log(formURL);
             $.ajax({
                 url: formURL,
                 type: "POST",
