@@ -3,6 +3,15 @@ from travelplans.plan_manager import PlanManager
 import travelplans.facebook_proxy
 from django.contrib.auth.models import User
 # Create your tests here.
+
+class PlanTestCase(TestCase):
+    def test__str__(self):
+        assertTrue(False)
+
+class JoinedPlanTestCase(TestCase):
+    def test__str__(self):
+        assertTrue(False)
+
 class PlanManagerTestCase(TestCase):
 
     def test_planmanager_get_by_id(self):
@@ -100,6 +109,10 @@ class FacebookProxyTestCase(TestCase):
 	def test_all_friends_exception(self):
 		Cathy = User.obejects.get(username__exact='Cathy')
 		self.assertRaises(NoFriendsException,all_friends,Csathy)
+
+class SocialAuthExceptionMiddlewareTestCase(TestCase):
+    def test_process_exception(self):
+        assertTrue(False)
 
 class SharePlanTestCase(TestCase):
 	def test_share_plan(self):
