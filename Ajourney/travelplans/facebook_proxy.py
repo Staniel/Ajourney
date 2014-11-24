@@ -28,8 +28,8 @@ def all_friends(user):
         social_user.extra_data['access_token'],)
         response = urllib2.Request(url) 
     	friends_json = json.loads(urllib2.urlopen(response).read()).get('data')   
-    	for i in xrange(len(friends_json)):
-			friend_list.append(friends_json[i]['id'])
+    	for friend_json in friends_json:
+            friend_list.append(friend_json['id'])
 	return friend_list
 
 def share_plan_action(user, plan, comment):
