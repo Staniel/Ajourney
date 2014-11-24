@@ -18,6 +18,7 @@ def is_friend(current_user, possible_friend):
 				return True
 	return False
 
+    
 def get_access_token(user):
 	if user:
 		social_user = user.social_auth.filter(provider='facebook',).first()
@@ -26,6 +27,7 @@ def get_access_token(user):
 	else:
 		return None
 
+        
 def all_friends(user):
 
 	friend_list = []
@@ -44,7 +46,6 @@ def all_friends(user):
 	except Exception as e:
 		raise FacebookError(e.message)
 	return friend_list
-
 
 
 def share_plan_action(user, plan, comment):
@@ -72,4 +73,3 @@ def get_picture_url(holder_id):
 			return user_picture_url		
 	except UserSocialAuth.DoesNotExist:
 		raise Exception('User has not used our website!')
-
