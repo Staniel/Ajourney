@@ -80,6 +80,7 @@ function(value, element) {
         submitHandler: function(e) {
             var postData = $("#editform").serializeArray();
             var formURL = $("#editform").attr("action");
+            console.log(formURL);
             $.ajax({
                 url: formURL,
                 type: "POST",
