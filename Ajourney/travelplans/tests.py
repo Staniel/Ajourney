@@ -234,6 +234,10 @@ class ManipulatePlanTestCase(TestCase):
         self.assertEqual(len(plan_list), 2)
         print "DDD"
         print self.plan1.id
+
+        response_none = self.client.post('/travelplans/delete_plan/1000', {})
+        self.assertEqual(response_none.status_code, 400)
+
         response = self.client.post('/travelplans/delete_plan/'+str(self.plan1.id), {})
         response2 = self.client.post('/travelplans/delete_plan/'+str(self.plan3.id), {})
         self.assertEqual(response.status_code, 200)
@@ -262,6 +266,9 @@ class ManipulatePlanTestCase(TestCase):
 
     def test_edit_plans(self):
         pm = PlanManager()
+
+        response_none = self.client.post('/travelplans/edit_plan/1000', {'editlimit':50})
+        self.assertEqual(response_none.status_code, 400)
         response = self.client.post('/travelplans/edit_plan/'+str(self.plan2.id), {'editlimit':50})
         self.assertEqual(response.status_code, 200)
         

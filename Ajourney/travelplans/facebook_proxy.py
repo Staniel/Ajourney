@@ -2,6 +2,7 @@ import facebook
 import urllib2
 import json
 from travelplans.my_exception import FacebookError, DatabaseError
+
 from social.apps.django_app.default.models import UserSocialAuth
 
 
@@ -26,6 +27,7 @@ def get_access_token(user):
 		return None
 
 def all_friends(user):
+
 	friend_list = []
 	if not user:
 		raise Exception('User cannot be None!')
@@ -42,6 +44,7 @@ def all_friends(user):
 	except Exception as e:
 		raise FacebookError(e.message)
 	return friend_list
+
 
 
 def share_plan_action(user, plan, comment):
@@ -69,3 +72,4 @@ def get_picture_url(holder_id):
 			return user_picture_url		
 	except UserSocialAuth.DoesNotExist:
 		raise Exception('User has not used our website!')
+
