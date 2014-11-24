@@ -20,7 +20,7 @@ def create_plan(request):
             new_plan.return_time = request.POST.get('returntime', datetime.today())
             new_plan.limit = request.POST.get('limit', 2)
             new_plan.save()
-            return HttpResponse("true");
+            return HttpResponse("true")
         else:
             redirect('login')
     except Exception as e:

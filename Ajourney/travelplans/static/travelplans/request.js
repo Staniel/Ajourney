@@ -1,4 +1,4 @@
-URLBase = "http://104.236.26.136/travelplans/";
+URLBase = "http://localhost:8000/travelplans/";
 $(document).ready(function() {
     $.validator.addMethod(
 "regex",
