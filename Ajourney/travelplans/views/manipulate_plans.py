@@ -12,23 +12,26 @@ def create_plan(request):
             return redirect('login')
         new_plan = Plan()
         new_plan.holder = request.user
+        #do validation
         new_plan.destination = request.POST.get('destination', "nonedestination")
         new_plan.description = request.POST.get('description', "nonedescript")
         new_plan.depart_time = request.POST.get('departtime', datetime.today())
         new_plan.return_time = request.POST.get('returntime', datetime.today())
-        if new_plan.depart_time > new_plan.return_time:
+        if new_plan.depart_time >= new_plan.return_time:
             raise Exception("depart time should be before return time")
         new_plan.limit = request.POST.get('limit', 2)
         new_plan.save()
         return HttpResponse("true");
     except Exception as e:
-            return HttpResponse(str(e), status = 400)
+        #error code
+        return HttpResponse(str(e), status = 400)
             
 def edit_plan(request, plan_id):
     try:    
         if not request.user.is_authenticated():
             return redirect('login')
-        pm=PlanManager()
+        pm = PlanManager()
+        #flake 8 
         plan = pm.get_plan_by_id(plan_id)
         if plan is None:
             raise Exception("plan not exist")
@@ -51,6 +54,7 @@ def delete_plan(request, plan_id):
     try:
         if not request.user.is_authenticated():
             return redirect('login')
+        print "hello"
         pm=PlanManager()
         plan = pm.get_plan_by_id(plan_id)
         if plan is None:
@@ -61,4 +65,5 @@ def delete_plan(request, plan_id):
         else:
             raise Exception("not editable")
     except Exception as e:
+        print str(e)
         return HttpResponse(str(e), status = 400)

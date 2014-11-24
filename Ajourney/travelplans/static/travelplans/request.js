@@ -25,6 +25,7 @@ function(value, element) {
             },
             returntime: {
                 required: true,
+                //name
                 greaterThan: "#newdepart"
             },
             limit: {
@@ -79,6 +80,7 @@ function(value, element) {
         submitHandler: function(e) {
             var postData = $("#editform").serializeArray();
             var formURL = $("#editform").attr("action");
+            console.log(formURL);
             $.ajax({
                 url: formURL,
                 type: "POST",
