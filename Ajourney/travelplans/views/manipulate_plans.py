@@ -56,6 +56,7 @@ def delete_plan(request, plan_id):
     try:
         if not request.user.is_authenticated():
             return redirect('login')
+        print "hello"
         pm=PlanManager()
         plan = pm.get_plan_by_id(plan_id)
         if plan is None:
@@ -66,4 +67,5 @@ def delete_plan(request, plan_id):
         else:
             raise Exception("not editable")
     except Exception as e:
+        print str(e)
         return HttpResponse(str(e), status = 400)

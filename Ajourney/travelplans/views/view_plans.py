@@ -76,7 +76,8 @@ def view_plan_detail(request,planid):
             return HttpResponse(template.render(context))
         else:
             return HttpResponse("This plan is not available.")
-    except:
+    except Exception as e:
+        print str(e)
         logout(request)
         return render_to_response('travelplans/login.html')
         '''
