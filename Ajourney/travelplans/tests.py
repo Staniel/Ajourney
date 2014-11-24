@@ -143,48 +143,48 @@ class PlanManagerTestCase(TestCase):
 # """There are 4 users in the database: Alice, Bob, Cathy, David"""
 # """Alice, Bob, David are friends, and Cathy is not friend of the aboves"""
 # class FacebookProxyTestCase(TestCase):
-# 	def test_is_friend_valid(self):
-# 		Alice = User.objects.get(username__exact='Alice')
-# 		Bob = User.objects.get(username__exact='Bob')
-# 		ret = travelplans.facebook_proxy.is_friend(Alice, Bob)
-# 		self.assertTrue(ret)
-# 		ret = travelplans.facebook_proxy.is_friend(Alice, Bob)
-# 		self.assertTrue(ret)
+#   def test_is_friend_valid(self):
+#       Alice = User.objects.get(username__exact='Alice')
+#       Bob = User.objects.get(username__exact='Bob')
+#       ret = travelplans.facebook_proxy.is_friend(Alice, Bob)
+#       self.assertTrue(ret)
+#       ret = travelplans.facebook_proxy.is_friend(Alice, Bob)
+#       self.assertTrue(ret)
 
-# 	def test_all_friends_valid(self):
-# 		Alice = User.objects.get(username__exact='Alice')
-# 		Bob = User.objects.get(username__exact='Bob')
-# 		David = User.objects.get(username__exact='David')
-# 		David = User.objects.get()
-# 		flist = all_friends(alice)
-# 		self.assertTrue(len(flist) == 2 and Bob in flist and David in flist)
+#   def test_all_friends_valid(self):
+#       Alice = User.objects.get(username__exact='Alice')
+#       Bob = User.objects.get(username__exact='Bob')
+#       David = User.objects.get(username__exact='David')
+#       David = User.objects.get()
+#       flist = all_friends(alice)
+#       self.assertTrue(len(flist) == 2 and Bob in flist and David in flist)
 
-# 	def test_all_friends_exception(self):
-# 		Cathy = User.obejects.get(username__exact='Cathy')
-# 		self.assertRaises(NoFriendsException,all_friends,Csathy)
+#   def test_all_friends_exception(self):
+#       Cathy = User.obejects.get(username__exact='Cathy')
+#       self.assertRaises(NoFriendsException,all_friends,Csathy)
 
 # class SharePlanTestCase(TestCase):
-# 	def test_share_plan(self):
+#   def test_share_plan(self):
 #         self.assertTrue(False)
 # class JoinPlanTestCase(TestCase):
-# 	def test_join_plan(self):
+#   def test_join_plan(self):
 #         self.assertTrue(False)
 # class ManipulatePlanTestCase(TestCase):
-# 	def test_manipulate_plan_create(self):
+#   def test_manipulate_plan_create(self):
 #         self.assertTrue(False)
-# 	def test_manipulate_plan_edit(self):
+#   def test_manipulate_plan_edit(self):
 #         self.assertTrue(False)
-# 	def test_manipulate_plan_delete(self):
+#   def test_manipulate_plan_delete(self):
 #         self.assertTrue(False)
 
 # class ViewPlanTestCase(TestCase):
-# 	def test_view_available_plans(self):
+#   def test_view_available_plans(self):
 #         self.assertTrue(False)
-# 	def test_view_my_plans(self):
+#   def test_view_my_plans(self):
 #         self.assertTrue(False)
-# 	def test_view_joined_plans(self):
+#   def test_view_joined_plans(self):
 #         self.assertTrue(False)
-# 	def test_view_plan_detail(self):
+#   def test_view_plan_detail(self):
 #         self.assertTrue(False)
 
 
@@ -232,6 +232,10 @@ class ManipulatePlanTestCase(TestCase):
         self.assertEqual(len(plan_list), 2)
         print "DDD"
         print self.plan1.id
+
+        response_none = self.client.post('/travelplans/delete_plan/1000', {})
+        self.assertEqual(response_none.status_code, 400)
+
         response = self.client.post('/travelplans/delete_plan/'+str(self.plan1.id), {})
         response2 = self.client.post('/travelplans/delete_plan/'+str(self.plan3.id), {})
         self.assertEqual(response.status_code, 200)
@@ -260,6 +264,9 @@ class ManipulatePlanTestCase(TestCase):
 
     def test_edit_plans(self):
         pm = PlanManager()
+
+        response_none = self.client.post('/travelplans/edit_plan/1000', {'editlimit':50})
+        self.assertEqual(response_none.status_code, 400)
         response = self.client.post('/travelplans/edit_plan/'+str(self.plan2.id), {'editlimit':50})
         self.assertEqual(response.status_code, 200)
         
