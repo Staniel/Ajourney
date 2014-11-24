@@ -30,7 +30,7 @@ class PlanManagerTestCase(TestCase):
         pm = PlanManager()
         plan_none = pm.get_plan_by_id(999)
         self.assertEqual(plan_none, None)
-        plan_1 = pm.get_plan_by_id(13)
+        plan_1 = pm.get_plan_by_id(15)
         self.assertEqual(plan_1.holder, self.user)
         self.assertEqual(plan_1.description, "test description")
         self.assertEqual(plan_1.destination, "west place")
@@ -201,6 +201,30 @@ class PlanManagerTestCase(TestCase):
 #         plan_list = pm.get_plans_by_user(self.user)
 #         self.assertEqual(len(plan_list), 1)
 
+
+
+class ManipulatePlanTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='testuser', email='test@example.com', password='top_secret', is_active=True)
+        self.user.set_password('hello') 
+        self.user.save()
+        self.plan1 = Plan.objects.create(holder = self.user, description="test description", destination="west place", limit = 3, depart_time = datetime.today(), return_time = datetime.today())
+        self.plan2 = Plan.objects.create(holder = self.user, description="test description", destination="west place", limit = 5, depart_time = datetime.today(), return_time = datetime.today())
+        self.user = authenticate(username='testuser', password='hello')
+        login = self.client.login(username='testuser', password='hello')
+        self.assertTrue(login)
+    def test_delete_plans(self):
+        pm = PlanManager()
+        plan_list = pm.get_plans_by_user(self.user)
+        self.assertEqual(len(plan_list), 2)
+        print self.plan1.id
+        response = self.client.post('/travelplans/delete_plan/1', {})
+        self.assertEqual(response.status_code, 200)
+        # print response
+        plan_list = pm.get_plans_by_user(self.user)
+        self.assertEqual(len(plan_list), 1)
+
+        
 #     def test_edit_plans(self):
 #         pm = PlanManager()
 #         plan_list = pm.get_plans_by_user(self.user)
@@ -214,11 +238,6 @@ class PlanManagerTestCase(TestCase):
 #         #   self.assertEqual(len(plan_list), 2)
 #         response = self.client.post('/travelplans/create_plan/', {})
 #         self.assertEqual(response.status_code, 200)
-
-
-
-        
-
   
 
 
