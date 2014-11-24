@@ -84,7 +84,12 @@ class PlanManagerTestCase(TestCase):
         """
         sample test case
         """
-        
+        pm = PlanManager()
+        self.assertTrue(pm.viewable(self.user, self.plan1))
+        self.assertTrue(pm.viewable(self.user, self.plan4))
+        self.assertFalse(pm.viewable(self.user, None))
+        self.assertTrue(pm.viewable(self.super, self.plan4))
+
         # self.assertTrue(False)
     def test_planmanager_editable(self):
         """
