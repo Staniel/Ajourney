@@ -6,7 +6,7 @@
 <div class="row" style="margin:50px">
 	<div class="col-md-3">
     {% if picture_url %}
-    <img src= "http://graph.facebook.com/{{picture_url}}/picture?type=large" class="img-circle" style="height:200px;width:200px;margin:20px">
+    <img src= {{picture_url}} class="img-circle" style="height:200px;width:200px;margin:20px">
     {% endif %}
     {% ifequal picture_url ''%}
     <img src= {% static 'travelplans/sample.jpg' %} class="img-circle" style="height:200px;width:200px;margin:20px">
