@@ -8,6 +8,7 @@ from travelplans.plan_manager import PlanManager
 
 def create_plan(request):
     try:
+
         if not request.user.is_authenticated():
             return redirect('login')
         new_plan = Plan()
@@ -22,6 +23,7 @@ def create_plan(request):
         new_plan.limit = request.POST.get('limit', 2)
         new_plan.save()
         return HttpResponse("true");
+
     except Exception as e:
         #error code
         print str(e)

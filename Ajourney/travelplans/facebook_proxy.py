@@ -28,8 +28,8 @@ def all_friends(user):
         social_user.extra_data['access_token'],)
         response = urllib2.Request(url) 
     	friends_json = json.loads(urllib2.urlopen(response).read()).get('data')   
-    	for i in xrange(len(friends_json)):
-			friend_list.append(friends_json[i]['id'])
+    	for friend_json in friends_json:
+            friend_list.append(friend_json['id'])
 	return friend_list
 
 def share_plan_action(user, plan, comment):
@@ -52,9 +52,9 @@ def get_picture_url(user, holder_id):
             user_picture_url = profile['url']
             return user_picture_url
             '''
-            return holder_id
+            user_picture_url = 'http://graph.facebook.com/'+str(holder_id)+'/picture?type=large'
+            return user_picture_url
         else:
-        #should be error? because the current user should have available token!
             return ''
     except Exception as e:
         print e.message
