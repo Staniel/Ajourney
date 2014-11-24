@@ -30,7 +30,7 @@ class PlanManagerTestCase(TestCase):
         """
         get plan by destination test case
         """
-        print "destinatiom"
+        # print "destinatiom"
         pm = PlanManager()
         plan_list = pm.get_plans_by_destination("west place")
         self.assertEqual(len(plan_list), 2)
@@ -85,8 +85,8 @@ class PlanManagerTestCase(TestCase):
         sample test case
         """
         pm = PlanManager()
-        print "id is "
-        print self.plan1.id
+        # print "id is "
+        # print self.plan1.id
         # pm.viewable(self.user, self.plan1)
         # self.assertTrue(pm.viewable(self.user, self.plan4))
         # self.assertFalse(pm.viewable(self.user, None))
@@ -184,21 +184,29 @@ class ManipulatePlanTestCase(TestCase):
         pm = PlanManager()
         plan_list = pm.get_plans_by_user(self.user)
         self.assertEqual(len(plan_list), 2)
-        print self.plan1.id
-        response = self.client.post('/travelplans/delete_plan/1', {})
+        # print self.plan1.id
+        response = self.client.post('/travelplans/delete_plan/'+str(self.plan1.id), {})
         self.assertEqual(response.status_code, 200)
         # print response
         plan_list = pm.get_plans_by_user(self.user)
         self.assertEqual(len(plan_list), 1)
-    # def test_create_plans(self):
-    #     pm = PlanManager()
-    #     plan_list = pm.get_plans_by_user(self.user)
-    #     self.assertEqual(len(plan_list), 2)
-    #     response = self.client.get('/travelplans/view_plan_detail/1/')
-    #     self.assertEqual(response.status_code, 200)
-    #     print response
-    #     plan_list = pm.get_plans_by_user(self.user)
-    #     self.assertEqual(len(plan_list), 1)
+    def test_create_plans(self):
+        pm = PlanManager()
+        plan_list = pm.get_plans_by_user(self.user)
+        self.assertEqual(len(plan_list), 2)
+        response = self.client.post('/travelplans/create_plan', {'holder':self.user})
+        self.assertEqual(response.status_code, 200)
+        # print response
+        plan_list = pm.get_plans_by_user(self.user)
+        self.assertEqual(len(plan_list), 3)
+    def test_edit_plans(self):
+        pm = PlanManager()
+        print self.plan2.id
+        response = self.client.post('/travelplans/edit_plan/'+str(self.plan2.id), {'editlimit':50})
+        self.assertEqual(response.status_code, 200)
+        # print response
+        plan2 = pm.get_plan_by_id(self.plan2.id)
+        self.assertEqual(plan2.limit, 50)
 
 
         

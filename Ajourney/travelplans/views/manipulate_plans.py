@@ -24,6 +24,7 @@ def create_plan(request):
         return HttpResponse("true");
     except Exception as e:
         #error code
+        print str(e)
         return HttpResponse(str(e), status = 400)
             
 def edit_plan(request, plan_id):
@@ -48,6 +49,7 @@ def edit_plan(request, plan_id):
         else:
             raise Exception("not editable")
     except Exception as e:
+        print str(e)
         return HttpResponse(str(e), status = 400)
 
 def delete_plan(request, plan_id):
