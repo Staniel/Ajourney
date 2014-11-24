@@ -55,7 +55,6 @@ def get_picture_url(user, holder_id):
             user_picture_url = 'http://graph.facebook.com/'+str(holder_id)+'/picture?type=large'
             return user_picture_url
         else:
-        #should be error? because the current user should have available token!
             return ''
     except Exception as e:
         print e.message
