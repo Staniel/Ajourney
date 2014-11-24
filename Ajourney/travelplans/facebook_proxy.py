@@ -14,9 +14,7 @@ def is_friend(user_a,user_b):
     if len(friend_list)>0:
         social_user_b = user_b.social_auth.filter(provider = 'facebook').first()
         if social_user_b:
-	    print "social_auth"
-	    print social_user_b
-	    if social_user_b.uid in friend_list:
+            if social_user_b.uid in friend_list:
                 return True
     return False
 
@@ -43,15 +41,21 @@ def share_plan_action(user, plan, comment):
     except Exception as e:
     	raise e
 
-def get_picture_url(user):
+def get_picture_url(user, holder_id):
     social_user = user.social_auth.filter( provider='facebook',).first()
     try:
         if social_user:
+        #for server only don't know why if use facebook GraphAPI the ?type=large is not work, so I return the id of holder and by id get the profile
+            '''
             graph = facebook.GraphAPI(social_user.extra_data['access_token'])
-            profile = graph.get_object('/me/picture')
+            profile = graph.get_object('/'+str(holder_id)+'/picture?type=large')
             user_picture_url = profile['url']
             return user_picture_url
+            '''
+            return holder_id
         else:
+        #should be error? because the current user should have available token!
             return ''
     except Exception as e:
         print e.message
+             

@@ -1,4 +1,6 @@
+
 URLBase = "http://localhost:8000/travelplans/";
+
 $(document).ready(function() {
     $.validator.addMethod(
 "regex",
@@ -25,6 +27,7 @@ function(value, element) {
             },
             returntime: {
                 required: true,
+                //name
                 greaterThan: "#newdepart"
             },
             limit: {
@@ -35,18 +38,17 @@ function(value, element) {
         },
         submitHandler: function(e) {
             var postData = $("#createform").serializeArray();
-            var formURL = $("#createform").attr("name");
+            var formURL = $("#createform").attr("action");
             $.ajax({
                 url: formURL,
                 type: "POST",
                 data: postData,
                 success: function(data) {
-                    if (data.indexOf("error") > -1)
-                        alert(data);
-                    else
-                        location.href = URLBase + "my_plans";
+                        location.href = "http://" + location.host + "/travelplans/my_plans";
                 },
-                error: function(jqXHR, textStatus, errorThrown) {}
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("error: "+jqXHR.responseText);
+                }
             });
         },
         highlight: function(element) {
@@ -79,17 +81,17 @@ function(value, element) {
         },
         submitHandler: function(e) {
             var postData = $("#editform").serializeArray();
-            var formURL = $("#editform").attr("name");
+            var formURL = $("#editform").attr("action");
             $.ajax({
                 url: formURL,
                 type: "POST",
                 data: postData,
                 success: function(data) {
-                    if (data.indexOf("error") > -1)
-                        alert(data);
                     location.reload();
                 },
-                error: function(jqXHR, textStatus, errorThrown) {}
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("error: "+jqXHR.responseText);
+                }
             });
         },
         highlight: function(element) {
@@ -106,80 +108,68 @@ function(value, element) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var postData = $("#deleteform").serializeArray();
-        var formURL = $("#deleteform").attr("name");
+        var formURL = $("#deleteform").attr("action");
         $.ajax({
             url: formURL,
             type: "POST",
             data: postData,
             success: function(data) {
-                if (data.indexOf("error") > -1)
-                    alert(data);
-                else {
-                    location.href = URLBase + "my_plans";
-                    // alert("successful delete");
-                }
+                    location.href = "http://" + location.host + "/travelplans/my_plans";
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error: "+jqXHR.responseText);
+            }
         });
     });
     $('#shareform').submit(function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var postData = $("#shareform").serializeArray();
-        var formURL = $("#shareform").attr("name");
+        var formURL = $("#shareform").attr("action");
         $.ajax({
             url: formURL,
             type: "POST",
             data: postData,
             success: function(data) {
-                if (data.indexOf("error") > -1)
-                    alert(data);
-                else {
-                    // alert("success");
                     location.reload();
-                }
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error: "+jqXHR.responseText);
+            }
         });
     });
     $('#joinform').submit(function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var postData = $("#joinform").serializeArray();
-        var formURL = $("#joinform").attr("name");
+        var formURL = $("#joinform").attr("action");
         $.ajax({
             url: formURL,
             type: "POST",
             data: postData,
             success: function(data) {
-                if (data.indexOf("error") > -1)
-                    alert(data);
-                else {
-                    // alert("success");
                     location.reload();
-                }
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error: "+jqXHR.responseText);
+            }
         });
     });
     $('#unjoinform').submit(function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var postData = $("#unjoinform").serializeArray();
-        var formURL = $("#unjoinform").attr("name");
+        var formURL = $("#unjoinform").attr("action");
         $.ajax({
             url: formURL,
             type: "POST",
             data: postData,
             success: function(data) {
-                if (data.indexOf("error") > -1)
-                    alert(data);
-                else {
-                    // alert("success");
                     location.reload();
-                }
             },
-            error: function(jqXHR, textStatus, errorThrown) {}
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error: "+jqXHR.responseText);
+            }
         });
     });
 });
