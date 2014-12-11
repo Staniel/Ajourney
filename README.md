@@ -4,4 +4,4 @@ A social travel planning website using Django. Front-end using Bootstrap and jQu
 
 users with Facebook accounts could view friend’s plans, create, edit, join and share plans on Facebook timeline. 
 
-Still under development...
+Still under development... visit via http://ajourney.co/
