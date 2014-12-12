@@ -1,14 +1,13 @@
 from django.shortcuts import  redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from travelplans.models import Plan
+from travelplans.models import Plan, PrivatePlan
 from datetime import datetime
 from django.template import RequestContext, loader
 from travelplans.plan_manager import PlanManager
-
+from social.apps.django_app.default.models import UserSocialAuth
 def create_plan(request):
     try:
-
         if not request.user.is_authenticated():
             return redirect('login')
         new_plan = Plan()
@@ -18,15 +17,36 @@ def create_plan(request):
         new_plan.description = request.POST.get('description', "nonedescript")
         new_plan.depart_time = request.POST.get('departtime', datetime.today())
         new_plan.return_time = request.POST.get('returntime', datetime.today())
+        is_private = request.POST.get('isprivate', False)
+        if is_private == "1":
+            new_plan.is_private = True
+        else:
+            new_plan.is_private = False
+        print "is private is "+str(new_plan.is_private)
         if new_plan.depart_time >= new_plan.return_time:
             raise Exception("depart time should be before return time")
         new_plan.limit = request.POST.get('limit', 2)
+        user_list = request.POST.getlist('friend',[])
         new_plan.save()
+        planid = new_plan.id
+        if new_plan.is_private:
+            for facebookid in user_list:
+                auth_user = UserSocialAuth.objects.filter(uid__exact=facebookid)
+                currentuser=User.objects.filter(id__exact=auth_user[0].user_id)
+                accessible_user = currentuser[0]
+                newPrivatePlan = PrivatePlan()
+                newPrivatePlan.accessible_user = accessible_user
+                newPrivatePlan.accessible_plan = new_plan
+                newPrivatePlan.save()
         return HttpResponse("true");
 
     except Exception as e:
         #error code
         print str(e)
+        pm = PlanManager()
+        plan = pm.get_plan_by_id(planid)
+        if plan is not None:
+            plan.delete()
         return HttpResponse(str(e), status = 400)
             
 def edit_plan(request, plan_id):
@@ -58,7 +78,6 @@ def delete_plan(request, plan_id):
     try:
         if not request.user.is_authenticated():
             return redirect('login')
-        print "hello"
         pm=PlanManager()
         plan = pm.get_plan_by_id(plan_id)
         if plan is None:

@@ -31,6 +31,19 @@ def all_friends(user):
     	for friend_json in friends_json:
             friend_list.append(friend_json['id'])
 	return friend_list
+def all_friends_names(user):
+    friend_list=[]
+    social_user = user.social_auth.filter( provider='facebook',).first()
+    if social_user:
+        url = u'https://graph.facebook.com/{0}/' \
+            u'friends?fields=id,name,location,picture' \
+            u'&access_token={1}'.format(social_user.uid,
+        social_user.extra_data['access_token'],)
+        response = urllib2.Request(url) 
+        friends_json = json.loads(urllib2.urlopen(response).read()).get('data')   
+        for friend_json in friends_json:
+            friend_list.append(friend_json)
+    return friend_list
 
 def share_plan_action(user, plan, comment):
     try:

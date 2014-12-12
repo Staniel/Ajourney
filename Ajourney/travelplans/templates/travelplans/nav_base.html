@@ -50,6 +50,35 @@
       <div class="modal-body">
         <form id="createform" role="form" action="{% url 'travelplans:create_plan' %}" method="post">
         {% csrf_token %}
+            <div class="radio">
+              <label id="sel-pub">
+                <input type="radio" name="isprivate" id="options1" value=0 checked>
+                public plan
+              </label>
+            </div>
+            <div class="radio">
+              <label id="sel-pri">
+                <input type="radio" name="isprivate" id="options2" value=1>
+                private plan
+              </label>
+            </div>
+            <div class="form-group hide" id="privatelist">
+                <label>Choose friends</label>
+                <div class="checkbox" id="friendlist">
+              
+            {% if friend_list.0 %}
+                {% for friend in friend_list %}
+              <label class="checkbox-inline">
+                <input name="friend" type="checkbox" id="{{friend.id}}" value="{{friend.id}}"> 
+                {{friend.name}}
+              </label>
+                {% endfor %}
+            {% else %}
+            <p>No friends are using own site, invite some!</p>
+            {% endif %}
+              
+            </div>
+            </div>
             <div class="form-group">
                 <label for="newdestination">Destination</label>
                 <input type="text" name="destination" class="createinput form-control" id="newdestination" placeholder="Enter Destination">

@@ -2,6 +2,18 @@
 URLBase = "http://localhost:8000/travelplans/";
 
 $(document).ready(function() {
+    $('#sel-pri').on('click', function(e){
+    // e.preventDefault();
+    e.stopImmediatePropagation();
+    // alert($(this).find('input').attr('id'));
+    $('#privatelist').removeClass('hide');
+});
+   $('#sel-pub').on('click', function(e){
+    // e.preventDefault();
+    e.stopImmediatePropagation();
+    // alert($(this).find('input').attr('id'));
+    $('#privatelist').addClass('hide');
+}); 
     $.validator.addMethod(
 "regex",
 function(value, element) {
