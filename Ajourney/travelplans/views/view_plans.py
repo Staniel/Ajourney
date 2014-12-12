@@ -68,7 +68,7 @@ def view_plan_detail(request,planid):
         else:
             holder_fb = plan.holder.social_auth.filter(provider = 'facebook').first()
             holder_fb_id = holder_fb.uid
-            picture_url = get_picture_url(user, holder_fb_id)
+            picture_url = get_picture_url(holder_fb_id)
             
         if plan and pm.viewable(user,plan):
             template = loader.get_template('travelplans/plan_detail.html')

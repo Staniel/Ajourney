@@ -6,9 +6,11 @@ from datetime import datetime
 import pytz
 from travelplans.models import Plan, JoinedPlan
 from django.contrib.auth.models import User
+
 from django.test.client import RequestFactory
 from django.contrib.auth import authenticate, login
 from django.utils.timezone import utc
+from django.utils import unittest
 
 #Create your tests here.
 class PlanManagerTestCase(TestCase):
@@ -272,6 +274,89 @@ class ManipulatePlanTestCase(TestCase):
         
         response_invalid = self.client.post('/travelplans/edit_plan/'+str(self.plan2.id), {'editdepart':datetime(2014,9,1,0,0,0),'editreturn':datetime(2013,9,1,0,0,0)})
 
+    def test_planmanager_viewable(self):
+        """
+        sample test case
+        """
+        self.assertTrue(False)
+    def test_planmanager_editable(self):
+        """
+        sample test case
+        """
+        self.assertTrue(False)
+    def test_planmanager_shareable(self):
+        """
+        sample test case
+        """
+        self.assertTrue(False)
+    def test_planmanager_joinable(self):
+        """
+        sample test case
+        """
+        self.assertTrue(False)
+
+
+"""There are 4 users in the database: Alice, Bob, Cathy, David"""
+"""Alice, Bob, David are friends, and Cathy is not friend of the aboves"""
+class FacebookProxyTestCase(unittest.TestCase):
+    def setUp(self):
+
+
+    def test_is_friend_valid(self):
+        '''
+        Alice = User.objects.get(username__exact='Alice')
+        Bob = User.objects.get(username__exact='Bob')
+        ret = travelplans.facebook_proxy.is_friend(Alice, Bob)
+        self.assertTrue(ret)
+        ret = travelplans.facebook_proxy.is_friend(Alice, Bob)
+        self.assertTrue(ret)
+        '''
+        assertTrue(True)
+
+    def test_all_friends_valid(self):
+        '''
+        Alice = User.objects.get(username__exact='Alice')
+        Bob = User.objects.get(username__exact='Bob')
+        David = User.objects.get(username__exact='David')
+        David = User.objects.get()
+        flist = all_friends(alice)
+        self.assertTrue(len(flist) == 2 and Bob in flist and David in flist)
+        '''
+        assertTrue(True)
+    '''
+    def test_all_friends_exception(self):
+        Cathy = User.obejects.get(username__exact='Cathy')
+        self.assertRaises(NoFriendsException,all_friends,Csathy)
+    '''
+
+class SocialAuthExceptionMiddlewareTestCase(TestCase):
+    def test_process_exception(self):
+        assertTrue(False)
+
+class SharePlanTestCase(TestCase):
+    def test_share_plan(self):
+        self.assertTrue(False)
+class JoinPlanTestCase(TestCase):
+    def test_join_plan(self):
+        self.assertTrue(False)
+class ManipulatePlanTestCase(TestCase):
+    def test_manipulate_plan_create(self):
+        self.assertTrue(False)
+    def test_manipulate_plan_edit(self):
+        self.assertTrue(False)
+    def test_manipulate_plan_delete(self):
+        self.assertTrue(False)
+
+class ViewPlanTestCase(TestCase):
+    def test_view_available_plans(self):
+        self.assertTrue(False)
+    def test_view_my_plans(self):
+        self.assertTrue(False)
+    def test_view_joined_plans(self):
+        self.assertTrue(False)
+    def test_view_plan_detail(self):
+        self.assertTrue(False)
+        '''
         # print response
         response2 = self.client.post('/travelplans/edit_plan/'+str(self.plan3.id), {'editlimit':50})
         plan2 = pm.get_plan_by_id(self.plan2.id)
@@ -282,8 +367,7 @@ class ManipulatePlanTestCase(TestCase):
         self.client.logout()
         response3 = self.client.post('/travelplans/edit_plan/'+str(self.plan2.id), {'editlimit':20})
         self.assertEqual(response3.status_code, 302)
+        '''
 
-
-      
 
 
