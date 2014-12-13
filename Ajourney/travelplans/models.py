@@ -22,4 +22,6 @@ class JoinedPlan(models.Model):
 class PrivatePlan(models.Model):
 	accessible_user = models.ForeignKey(User)
 	accessible_plan = models.ForeignKey(Plan)
+	def __str__(self):
+		return self.accessible_user.__str__()+" can see "+self.accessible_plan.__str__()
 

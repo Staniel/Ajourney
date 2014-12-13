@@ -73,6 +73,18 @@
                 {{friend.name}}
               </label>
                 {% endfor %}
+                {% for friend in friend_list %}
+              <label class="checkbox-inline">
+                <input name="friend" type="checkbox" id="{{friend.id}}" value="{{friend.id}}"> 
+                {{friend.name}}
+              </label>
+                {% endfor %}
+                {% for friend in friend_list %}
+              <label class="checkbox-inline">
+                <input name="friend" type="checkbox" id="{{friend.id}}" value="{{friend.id}}"> 
+                {{friend.name}}
+              </label>
+                {% endfor %}
             {% else %}
             <p>No friends are using own site, invite some!</p>
             {% endif %}

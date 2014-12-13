@@ -60,3 +60,8 @@
 .help-block {
     color: #a94442;
     }
+#friendlist{
+	border: solid red 1px;
+	overflow: scroll;
+	height: 60px;
+}

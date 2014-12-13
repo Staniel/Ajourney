@@ -23,7 +23,7 @@ def create_plan(request):
         else:
             new_plan.is_private = False
         print "is private is "+str(new_plan.is_private)
-        if new_plan.depart_time >= new_plan.return_time:
+        if new_plan.depart_time > new_plan.return_time:
             raise Exception("depart time should be before return time")
         new_plan.limit = request.POST.get('limit', 2)
         user_list = request.POST.getlist('friend',[])
