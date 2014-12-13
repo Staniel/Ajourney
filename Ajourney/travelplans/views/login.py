@@ -30,7 +30,6 @@ def facebook_login(request):
             except Exception as e:
                 print str(e)
                 logout(request)
-                return HttpResponse("in login view"+str(e))
-                # return render_to_response('travelplans/login.html')
+                render_to_response('travelplans/error.html',{'error_message': str(e)})
     context = RequestContext(request, {'request': request, 'user': request.user})
     return render_to_response('travelplans/login.html',context_instance=context)

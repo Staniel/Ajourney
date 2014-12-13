@@ -1,10 +1,10 @@
 
-URLBase = "http://localhost:8000/travelplans/";
-
 $(document).ready(function() {
     if (!$.fn.dataTable.isDataTable( '#plantable' ) ) {
         $('#plantable').DataTable( {
-        "searching": false
+        "searching": false,
+        "lengthMenu": [[8, 15, 30, -1], [8, 15, 30, "All"]],
+        // "autoWidth": false
     } );
     }   
     $('#sel-pri').on('click', function(e){

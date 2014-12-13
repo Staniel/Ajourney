@@ -23,40 +23,51 @@ def available_plans(request):
         return HttpResponse(template.render(context))
     except Exception as e:
         print str(e)
-        logout(request)
-        return HttpResponse(str(e))
-        # return render_to_response('travelplans/login.html')
+        # logout(request)
+        render_to_response('travelplans/error.html',{'error_message': str(e)})
 
 
 def my_plans(request):
-    user=request.user
-    if not user.is_authenticated():
-        return redirect('login')
-    pm=PlanManager()
-    my_plans=pm.get_plans_by_user(user)
-    friend_list = all_friends_names(user)
-    template = loader.get_template('travelplans/view_plans.html')
-    context = RequestContext(request, {
-        'plan_list': my_plans,
-        'list_title': "All My Plans",
-        'friend_list': friend_list
-    })
-    return HttpResponse(template.render(context))
+    try:
+        user=request.user
+        if not user.is_authenticated():
+            return redirect('login')
+        pm=PlanManager()
+        my_plans=pm.get_plans_by_user(user)
+        friend_list = all_friends_names(user)
+        template = loader.get_template('travelplans/view_plans.html')
+        context = RequestContext(request, {
+            'plan_list': my_plans,
+            'list_title': "All My Plans",
+            'friend_list': friend_list
+        })
+        return HttpResponse(template.render(context))
+    except Exception as e:
+        print str(e)
+        # logout(request)
+        render_to_response('travelplans/error.html',{'error_message': str(e)})
+
 
 def joined_plans(request):
-    user=request.user
-    if not user.is_authenticated():
-        return redirect('login')
-    pm=PlanManager()
-    joined_plans=pm.get_joined_plans(user)
-    friend_list = all_friends_names(user)
-    template = loader.get_template('travelplans/view_plans.html')
-    context = RequestContext(request, {
-        'plan_list': joined_plans,
-        'list_title': "All Joined Plans",
-        'friend_list': friend_list
-    })
-    return HttpResponse(template.render(context))
+    try:
+        user=request.user
+        if not user.is_authenticated():
+            return redirect('login')
+        pm=PlanManager()
+        joined_plans=pm.get_joined_plans(user)
+        friend_list = all_friends_names(user)
+        template = loader.get_template('travelplans/view_plans.html')
+        context = RequestContext(request, {
+            'plan_list': joined_plans,
+            'list_title': "All Joined Plans",
+            'friend_list': friend_list
+        })
+        return HttpResponse(template.render(context))
+    except Exception as e:
+        print str(e)
+        # logout(request)
+        render_to_response('travelplans/error.html',{'error_message': str(e)})
+
 
 def view_plan_detail(request,planid):
     try:
@@ -88,12 +99,17 @@ def view_plan_detail(request,planid):
             return HttpResponse(template.render(context))
         else:
             # change to error page
-            return HttpResponse("This plan is not available.")
+            raise Exception("the plan is not available")
     except Exception as e:
         print str(e)
-        logout(request)
-        return render_to_response('travelplans/login.html')   
+        # logout(request)
+        render_to_response('travelplans/error.html',{'error_message': str(e)})  
 def help(request):
-    template = loader.get_template('travelplans/help.html')
-    context = RequestContext(request)
-    return HttpResponse(template.render(context))
+    try:
+        template = loader.get_template('travelplans/help.html')
+        context = RequestContext(request)
+        return HttpResponse(template.render(context))
+    except Exception as e:
+        print str(e)
+        # logout(request)
+        render_to_response('travelplans/error.html',{'error_message': str(e)})  
