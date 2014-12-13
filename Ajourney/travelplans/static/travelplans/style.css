@@ -61,7 +61,8 @@
     color: #a94442;
     }
 #friendlist{
-	border: solid red 1px;
+	border: solid 1px;
+	border-color: #ecf0f1;
 	overflow: scroll;
 	height: 60px;
 }
