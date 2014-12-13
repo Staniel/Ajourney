@@ -24,7 +24,9 @@ def available_plans(request):
     except Exception as e:
         print str(e)
         logout(request)
-        return render_to_response('travelplans/login.html')
+        return HttpResponse(str(e))
+        # return render_to_response('travelplans/login.html')
+
 
 def my_plans(request):
     user=request.user
