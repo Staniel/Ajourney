@@ -14,7 +14,7 @@ def facebook_login(request):
     if hasattr(request.user, 'social_auth'):
         social_user = request.user.social_auth.filter(provider='facebook',).first()
         if social_user:
-            try:
+            # try:
                 graph = facebook.GraphAPI(social_user.extra_data['access_token'])
                 profile = graph.get_object("me")
                 facebookid=profile['id']
@@ -27,10 +27,10 @@ def facebook_login(request):
                         if currentuser and currentuser.is_active:
                             login(request,currentuser)
                             return redirect('travelplans/')
-            except Exception as e:
-                print str(e)
-                logout(request)
-                return HttpResponse(str(e))
+            # except Exception as e:
+                # print str(e)
+                # logout(request)
+                # return HttpResponse(str(e))
                 # return render_to_response('travelplans/login.html')
     context = RequestContext(request, {'request': request, 'user': request.user})
     return render_to_response('travelplans/login.html',context_instance=context)
