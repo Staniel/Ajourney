@@ -4,8 +4,6 @@ A social travel planning website using Django. Front-end using Bootstrap and jQu
 
 users with Facebook accounts could view friend’s plans, create, edit, join and share plans on Facebook timeline. 
 
-Dec 13
-
-New features: Users can create private plan now, where only selected best friends could view and join!
+(Dec 13) New features: Users can create private plan now, where only selected best friends could view and join!
 
 Still under development... visit via http://ajourney.co/
