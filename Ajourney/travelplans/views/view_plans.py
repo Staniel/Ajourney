@@ -6,7 +6,7 @@ from django.contrib.auth import logout
 from travelplans.facebook_proxy import get_picture_url, all_friends_names
 
 def available_plans(request):
-    # try:
+    try:
         user=request.user
         if not user.is_authenticated():
             return redirect('login')
@@ -21,10 +21,10 @@ def available_plans(request):
             'friend_list': friend_list
         })
         return HttpResponse(template.render(context))
-    # except Exception as e:
-    #     print str(e)
-    #     logout(request)
-    #     return HttpResponse(str(e))
+    except Exception as e:
+        print str(e)
+        logout(request)
+        return HttpResponse(str(e))
         # return render_to_response('travelplans/login.html')
 
 
