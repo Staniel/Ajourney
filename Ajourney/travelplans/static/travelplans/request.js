@@ -2,6 +2,11 @@
 URLBase = "http://localhost:8000/travelplans/";
 
 $(document).ready(function() {
+    if (!$.fn.dataTable.isDataTable( '#plantable' ) ) {
+        $('#plantable').DataTable( {
+        "searching": false
+    } );
+    }   
     $('#sel-pri').on('click', function(e){
     // e.preventDefault();
     e.stopImmediatePropagation();

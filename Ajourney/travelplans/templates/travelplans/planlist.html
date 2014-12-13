@@ -28,6 +28,7 @@
 
             {% if plan_list.0 %}
             <table id="plantable" class="table table-striped">
+                <thead>
                 <tr>
                     <td>Destination</td>
                     <td>Depart Time</td>
@@ -35,7 +36,8 @@
                     <td>Holder</td>
                     <td>Max Traveller</td>
                 </tr>
-                
+                </thead>
+                <tbody>
                 {% for plan in plan_list %}
                 <tr class="plan_tr">
                     <td class="plan_dest"><a href="/travelplans/view_plan_detail/{{plan.id}}/">{{ plan.destination }}</a></td>
@@ -51,6 +53,7 @@
                     <td class="plan_limit">{{plan.limit}}</td>
                 </tr>
                 {% endfor %}
+            </tbody>
             </table>
             {% else %}
             <p>No plans are available.</p>
