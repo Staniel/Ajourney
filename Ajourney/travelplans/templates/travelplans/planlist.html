@@ -35,6 +35,15 @@
                     <td>Max Traveller</td>
                 </tr>
                 </thead>
+                <!-- <tfoot>
+            <tr>
+                <th>Destination</th>
+                <th>Depart Time</th>
+                <th>Return Time</th>
+                <th>Holder</th>
+                <th>Max Traveller</th>
+            </tr>
+        </tfoot> -->
                 <tbody>
                 {% for plan in plan_list %}
                 <tr class="plan_tr">
@@ -52,6 +61,7 @@
                 </tr>
                 {% endfor %}
             </tbody>
+
             </table>
             {% else %}
             <p>No plans are available.</p>

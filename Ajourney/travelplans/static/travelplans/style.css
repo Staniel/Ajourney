@@ -66,3 +66,17 @@
 	overflow: scroll;
 	height: 60px;
 }
+/*tfoot{
+	display: table-header-group;
+}
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+
+    }*/
+/*.dataTables_filter {
+	visibility: hidden;
+}
+*/
+/*#plantable_paginate { float:left;  }*/

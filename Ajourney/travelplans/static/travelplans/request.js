@@ -1,12 +1,34 @@
 
 $(document).ready(function() {
-    if (!$.fn.dataTable.isDataTable( '#plantable' ) ) {
+    if (!$.fn.dataTable.isDataTable( '#plantable' ) ) 
+    {
         $('#plantable').DataTable( {
-        "searching": false,
-        "lengthMenu": [[8, 15, 30, -1], [8, 15, 30, "All"]],
+        // "lengthMenu": [[10, 15, 30, -1], [10, 15, 30, "All"]],
         // "autoWidth": false
-    } );
-    }   
+        "bLengthChange": false,
+        // "sDom": '<"bottom"i>rtlp',
+        "dom": 'rt<"bottom"ilp>',
+         // "bInfo" : false,
+         "iDisplayLength": 30
+        } );
+    } 
+    // $('#plantable tfoot th').each( function () {
+    //     var title = $('#plantable thead th').eq( $(this).index() ).text();
+    //     $(this).html( '<input type="text" placeholder="filter '+title+'" />' );
+    // } );  
+    // var table = $('#plantable').DataTable();
+    // // // // Apply the search
+    // table.columns().eq(0).each( 
+    //     function ( colIdx ) {
+    //     $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', 
+    //         function () {
+    //         table
+    //             .column( colIdx )
+    //             .search( this.value )
+    //             .draw();
+    //     } );
+    // } );
+
     $('#sel-pri').on('click', function(e){
     // e.preventDefault();
     e.stopImmediatePropagation();
