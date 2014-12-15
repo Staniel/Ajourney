@@ -1,17 +1,17 @@
 
 $(document).ready(function() {
-    if (!$.fn.dataTable.isDataTable( '#plantable' ) ) 
-    {
-        $('#plantable').DataTable( {
-        // "lengthMenu": [[10, 15, 30, -1], [10, 15, 30, "All"]],
-        // "autoWidth": false
-        "bLengthChange": false,
-        // "sDom": '<"bottom"i>rtlp',
-        "dom": 'rt<"bottom"ilp>',
-         // "bInfo" : false,
-         "iDisplayLength": 30
-        } );
-    } 
+    // if (!$.fn.dataTable.isDataTable( '#plantable' ) ) 
+    // {
+    //     $('#plantable').DataTable( {
+    //     // "lengthMenu": [[10, 15, 30, -1], [10, 15, 30, "All"]],
+    //     // "autoWidth": false
+    //     "bLengthChange": false,
+    //     // "sDom": '<"bottom"i>rtlp',
+    //     "dom": 'rt<"bottom"ilp>',
+    //      // "bInfo" : false,
+    //      "iDisplayLength": 30
+    //     } );
+    // } 
     // $('#plantable tfoot th').each( function () {
     //     var title = $('#plantable thead th').eq( $(this).index() ).text();
     //     $(this).html( '<input type="text" placeholder="filter '+title+'" />' );

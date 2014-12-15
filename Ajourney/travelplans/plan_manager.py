@@ -67,13 +67,11 @@ class PlanManager(object):
 		return available_plans
 
 	def viewable(self,user,plan):
-		#some viewable trouble with useror admin, need discussion
 		if plan is None:
 			return False
 		if user == plan.holder or user.is_superuser or plan.holder.is_superuser:
 			return True
 		if plan.is_private:
-			print "enter viewable is private"
 			if PrivatePlan.objects.filter(accessible_user=user, accessible_plan=plan).exists():
 				return True
 			else:

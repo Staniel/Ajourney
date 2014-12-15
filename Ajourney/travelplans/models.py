@@ -21,7 +21,7 @@ class JoinedPlan(models.Model):
 
 class PrivatePlan(models.Model):
 	accessible_user = models.ForeignKey(User)
-	accessible_plan = models.ForeignKey(Plan)
+	accessible_plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.accessible_user.__str__()+" can see "+self.accessible_plan.__str__()
 
