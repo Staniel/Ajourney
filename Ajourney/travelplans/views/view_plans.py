@@ -24,7 +24,7 @@ def available_plans(request):
     except Exception as e:
         print str(e)
         # logout(request)
-        render_to_response('travelplans/error.html',{'error_message': str(e)})
+        return render_to_response('travelplans/error.html',{'error_message': str(e)})
 
 
 def my_plans(request):
@@ -45,7 +45,7 @@ def my_plans(request):
     except Exception as e:
         print str(e)
         # logout(request)
-        render_to_response('travelplans/error.html',{'error_message': str(e)})
+        return render_to_response('travelplans/error.html',{'error_message': str(e)})
 
 
 def joined_plans(request):
@@ -66,7 +66,7 @@ def joined_plans(request):
     except Exception as e:
         print str(e)
         # logout(request)
-        render_to_response('travelplans/error.html',{'error_message': str(e)})
+        return render_to_response('travelplans/error.html',{'error_message': str(e)})
 
 
 def view_plan_detail(request,planid):
@@ -103,7 +103,7 @@ def view_plan_detail(request,planid):
     except Exception as e:
         print str(e)
         # logout(request)
-        render_to_response('travelplans/error.html',{'error_message': str(e)})  
+        return render_to_response('travelplans/error.html',{'error_message': str(e)})  
 def help(request):
     try:
         template = loader.get_template('travelplans/help.html')
@@ -112,4 +112,4 @@ def help(request):
     except Exception as e:
         print str(e)
         # logout(request)
-        render_to_response('travelplans/error.html',{'error_message': str(e)})  
+        return render_to_response('travelplans/error.html',{'error_message': str(e)})  
