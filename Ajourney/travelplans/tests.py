@@ -43,7 +43,7 @@ class PlanManagerTestCase(TestCase):
         self.assertEqual(plan_1.return_time,  pytz.utc.localize(datetime(2014,9,8,0,0,0)))
 
     def test_viewable(self):
-
+        pass
 
 
     def test_planmanager_get_by_destination(self):
@@ -104,17 +104,6 @@ class PlanManagerTestCase(TestCase):
         """
         sample test case
         """
-        pm = PlanManager()
-
-        # self.assertTrue(pm.viewable(self.user, self.plan1))
-
-        print "id is "
-        print self.plan1.id
-        # pm.viewable(self.user, self.plan1)
-        # self.assertTrue(pm.viewable(self.user, self.plan4))
-        # self.assertFalse(pm.viewable(self.user, None))
-        # self.assertTrue(pm.viewable(self.super, self.plan4))
-
         # self.assertTrue(False)
     def test_planmanager_editable(self):
         """
@@ -130,11 +119,11 @@ class PlanManagerTestCase(TestCase):
         """
         sample test case
         """
-        pm = PlanManager()
-        self.assertTrue(pm.sharable(self.user, self.plan1))
-        self.assertTrue(pm.sharable(self.user, self.plan4))
-        self.assertFalse(pm.sharable(self.super, None))
-        self.assertFalse(pm.sharable(self.super, self.plan1))
+        # pm = PlanManager()
+        # self.assertTrue(pm.sharable(self.user, self.plan1))
+        # self.assertTrue(pm.sharable(self.user, self.plan4))
+        # self.assertFalse(pm.sharable(self.super, None))
+        # self.assertFalse(pm.sharable(self.super, self.plan1))
 
 
         # self.assertTrue(False)
@@ -142,12 +131,9 @@ class PlanManagerTestCase(TestCase):
         """
         sample test case
         """
-        # self.assertTrue(False)
+        self.assertTrue(False)
 
-
-
-
- class ViewPlanTestCase(TestCase):
+class ViewPlanTestCase(TestCase):
    def test_view_available_plans(self):
          self.assertTrue(False)
    def test_view_my_plans(self):
@@ -243,7 +229,7 @@ class ManipulatePlanTestCase(TestCase):
 
 class SocialAuthExceptionMiddlewareTestCase(TestCase):
     def test_process_exception(self):
-        assertTrue(False)
+        self.assertTrue(False)
 
 class SharePlanTestCase(TestCase):
     def test_share_plan(self):
