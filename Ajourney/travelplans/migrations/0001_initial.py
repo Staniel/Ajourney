@@ -13,6 +13,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='JoinedPlan',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Plan',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -21,10 +30,34 @@ class Migration(migrations.Migration):
                 ('limit', models.IntegerField()),
                 ('depart_time', models.DateTimeField()),
                 ('return_time', models.DateTimeField()),
+                ('is_private', models.BooleanField(default=False)),
                 ('holder', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
             bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='PrivatePlan',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('accessible_plan', models.ForeignKey(to='travelplans.Plan')),
+                ('accessible_user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='joinedplan',
+            name='joined_plan',
+            field=models.ForeignKey(to='travelplans.Plan'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='joinedplan',
+            name='joined_user',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            preserve_default=True,
         ),
     ]
