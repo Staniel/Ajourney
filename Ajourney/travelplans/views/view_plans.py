@@ -76,6 +76,8 @@ def view_plan_detail(request,planid):
             return redirect('login')
         pm = PlanManager()
         plan=pm.get_plan_by_id(planid)
+        if plan is None:
+            raise Exception("this plan do not exist")
         if plan.holder.is_superuser:
             picture_url = ''
         else:
@@ -83,7 +85,7 @@ def view_plan_detail(request,planid):
             holder_fb_id = holder_fb.uid
             picture_url = get_picture_url(holder_fb_id)
             
-        if plan and pm.viewable(user,plan):
+        if pm.viewable(user,plan):
             template = loader.get_template('travelplans/plan_detail.html')
             friend_list = all_friends_names(user)
             context = RequestContext(request, {
