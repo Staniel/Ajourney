@@ -93,7 +93,7 @@ class PlanManager(object):
 		if plan is None:
 			return False
 		if not user.is_superuser:
-			return viewable(user,plan)
+			return self.viewable(user,plan)
 		else:
 			return False
 
@@ -104,7 +104,7 @@ class PlanManager(object):
 			return False
 		else:
 			joiners=self.get_all_joiners(plan)
-			if viewable(user,plan):
+			if self.viewable(user,plan):
 				if len(joiners)<plan.limit-1 and user not in joiners:
 					return True
 				else:
