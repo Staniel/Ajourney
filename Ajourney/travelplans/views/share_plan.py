@@ -9,7 +9,7 @@ def share_plan(request, plan_id):
 		user = request.user
 		if not user.is_authenticated():
 			return redirect('login')
-		URL = " http://104.236.26.136/travelplans/view_plan_detail/"+str(plan_id)+"/"
+		URL = " http://ajourney.co/travelplans/view_plan_detail/"+str(plan_id)+"/"
 		pm = PlanManager()
 		comment = request.POST.get('sharecomment', "")
 		plan = pm.get_plan_by_id(plan_id)
