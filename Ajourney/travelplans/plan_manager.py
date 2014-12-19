@@ -102,6 +102,8 @@ class PlanManager(object):
 			return False
 		if user.is_superuser:
 			return False
+		elif user == plan.holder:
+			return False
 		else:
 			joiners=self.get_all_joiners(plan)
 			if self.viewable(user,plan):
