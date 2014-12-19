@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from travelplans.facebook_proxy import share_plan_action
+from travelplans import facebook_proxy
 from travelplans.plan_manager import PlanManager
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.db import InternalError, DatabaseError
@@ -15,7 +15,7 @@ def share_plan(request, plan_id):
 		plan = pm.get_plan_by_id(plan_id)
 		if plan is None:
 			raise Exception("plan do not exist")
-		if share_plan_action(user, plan, comment+URL):
+		if facebook_proxy.share_plan_action(user, plan, comment+URL):
 			return HttpResponse("true")
 		else:
 			raise Exception("share plan failed")

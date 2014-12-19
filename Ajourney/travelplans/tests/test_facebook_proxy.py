@@ -1,12 +1,12 @@
 from django.utils import unittest
 from travelplans import facebook_proxy
-from mock import patch
-import urllib2
+from travelplans.my_exception import FacebookError, DatabaseError
 from social.apps.django_app.default.models import UserSocialAuth
 from travelplans.models import User,Plan
+import urllib2
 import json
 import facebook
-from travelplans.my_exception import FacebookError, DatabaseError
+from mock import patch
 import mock
 import datetime
 
@@ -38,7 +38,7 @@ class FacebookProxyTestCase(unittest.TestCase):
         social_auth4=UserSocialAuth(user_id=user4.id,uid='facebookid4',provider='facebook',extra_data={'access_token':'4','id':'facebookid4'})
         user4.save()
         user4.social_auth.add(social_auth4)
-        user1.save()
+        user4.save()
         self.social_auth4=social_auth4
         self.user4=user4
 

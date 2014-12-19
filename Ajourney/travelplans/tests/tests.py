@@ -2,6 +2,7 @@ from django.test import TestCase
 from travelplans.plan_manager import PlanManager
 import travelplans.facebook_proxy
 from datetime import datetime
+from travelplans import plan_manager
 
 import pytz
 from travelplans.models import Plan, JoinedPlan
@@ -99,49 +100,40 @@ class PlanManagerTestCase(TestCase):
         pm = PlanManager()
         self.assertTrue(pm.has_joined_plan(self.user, self.plan4))
         self.assertFalse(pm.has_joined_plan(self.user, self.plan3))
-
+       
     def test_planmanager_viewable(self):
-        """
-        sample test case
-        """
-        # self.assertTrue(False)
-    def test_planmanager_editable(self):
-        """
-        sample test case
-        """
         pm = PlanManager()
-        self.assertTrue(pm.editable(self.user, self.plan1))
-        self.assertFalse(pm.editable(self.user, self.plan4))
-        self.assertFalse(pm.editable(self.user, None))
-        self.assertTrue(pm.editable(self.super, self.plan4))
-        # self.assertTrue(False)
-    def test_planmanager_shareable(self):
-        """
-        sample test case
-        """
-        # pm = PlanManager()
-        # self.assertTrue(pm.sharable(self.user, self.plan1))
-        # self.assertTrue(pm.sharable(self.user, self.plan4))
-        # self.assertFalse(pm.sharable(self.super, None))
-        # self.assertFalse(pm.sharable(self.super, self.plan1))
-
-
-        # self.assertTrue(False)
+        ret1 = pm.viewable(self.super, None)
+        self.assertFalse(ret1)
+        ret2 = pm.viewable(self.super, self.plan1)
+        self.assertTrue(ret2)
+        
+        
+    def test_planmanager_editable(self):
+        pm = PlanManager()
+        ret1 = pm.editable(self.super, None)
+        self.assertFalse(ret1)
+        ret2 = pm.editable(self.super, self.plan1)
+        self.assertTrue(ret2)
+        
+    def test_planmanager_sharable(self):
+        pm = PlanManager()
+        ret1 = pm.sharable(self.super, None)
+        self.assertFalse(ret1)
+        ret2 = pm.sharable(self.super, self.plan1)
+        self.assertFalse(ret2)
+        ret3 = pm.sharable(self.user, self.plan1)
+        self.assertTrue(ret3)
+        
     def test_planmanager_joinable(self):
-        """
-        sample test case
-        """
-        self.assertTrue(False)
-
-class ViewPlanTestCase(TestCase):
-   def test_view_available_plans(self):
-         self.assertTrue(False)
-   def test_view_my_plans(self):
-         self.assertTrue(False)
-   def test_view_joined_plans(self):
-         self.assertTrue(False)
-   def test_view_plan_detail(self):
-         self.assertTrue(False)
+        pm = PlanManager()
+        ret1 = pm.joinable(self.user, None)
+        self.assertFalse(ret1)
+        ret2 = pm.joinable(self.super, self.plan1)
+        self.assertFalse(ret2)
+        ret3 = pm.joinable(self.user, self.plan1)
+        self.assertFalse(ret3)
+        
 
 
 class ManipulatePlanTestCase(TestCase):
@@ -204,56 +196,7 @@ class ManipulatePlanTestCase(TestCase):
         
         response_invalid = self.client.post('/travelplans/edit_plan/'+str(self.plan2.id), {'editdepart':datetime(2014,9,1,0,0,0),'editreturn':datetime(2013,9,1,0,0,0)})
 
-    def test_planmanager_viewable(self):
-        """
-        sample test case
-        """
-        self.assertTrue(False)
-    def test_planmanager_editable(self):
-        """
-        sample test case
-        """
-        self.assertTrue(False)
-    def test_planmanager_shareable(self):
-        """
-        sample test case
-        """
-        self.assertTrue(False)
-    def test_planmanager_joinable(self):
-        """
-        sample test case
-        """
-        self.assertTrue(False)
-
-
-
-class SocialAuthExceptionMiddlewareTestCase(TestCase):
-    def test_process_exception(self):
-        self.assertTrue(False)
-
-class SharePlanTestCase(TestCase):
-    def test_share_plan(self):
-        self.assertTrue(False)
-class JoinPlanTestCase(TestCase):
-    def test_join_plan(self):
-        self.assertTrue(False)
-class ManipulatePlanTestCase(TestCase):
-    def test_manipulate_plan_create(self):
-        self.assertTrue(False)
-    def test_manipulate_plan_edit(self):
-        self.assertTrue(False)
-    def test_manipulate_plan_delete(self):
-        self.assertTrue(False)
-
-class ViewPlanTestCase(TestCase):
-    def test_view_available_plans(self):
-        self.assertTrue(False)
-    def test_view_my_plans(self):
-        self.assertTrue(False)
-    def test_view_joined_plans(self):
-        self.assertTrue(False)
-    def test_view_plan_detail(self):
-        self.assertTrue(False)
+        
         '''
         # print response
         response2 = self.client.post('/travelplans/edit_plan/'+str(self.plan3.id), {'editlimit':50})

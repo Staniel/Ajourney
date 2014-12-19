@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from travelplans.plan_manager import PlanManager
 from travelplans.models import Plan, JoinedPlan

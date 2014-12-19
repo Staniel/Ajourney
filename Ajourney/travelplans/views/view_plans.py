@@ -3,7 +3,7 @@ from django.template import RequestContext, loader
 from travelplans.plan_manager import PlanManager
 from django.shortcuts import render,redirect,render_to_response
 from django.contrib.auth import logout
-from travelplans.facebook_proxy import get_picture_url, all_friends_names
+from travelplans import facebook_proxy
 
 def available_plans(request):
     try:
@@ -12,7 +12,7 @@ def available_plans(request):
             return redirect('login')
         pm=PlanManager()
         available_plans=pm.get_all_available_plans(user)
-        friend_list = all_friends_names(user)
+        friend_list = facebook_proxy.all_friends_names(user)
         # print friend_list
         template = loader.get_template('travelplans/view_plans.html')
         context = RequestContext(request, {
@@ -34,7 +34,7 @@ def my_plans(request):
             return redirect('login')
         pm=PlanManager()
         my_plans=pm.get_plans_by_user(user)
-        friend_list = all_friends_names(user)
+        friend_list = facebook_proxy.all_friends_names(user)
         template = loader.get_template('travelplans/view_plans.html')
         context = RequestContext(request, {
             'plan_list': my_plans,
@@ -55,7 +55,7 @@ def joined_plans(request):
             return redirect('login')
         pm=PlanManager()
         joined_plans=pm.get_joined_plans(user)
-        friend_list = all_friends_names(user)
+        friend_list = facebook_proxy.all_friends_names(user)
         template = loader.get_template('travelplans/view_plans.html')
         context = RequestContext(request, {
             'plan_list': joined_plans,
@@ -83,11 +83,11 @@ def view_plan_detail(request,planid):
         else:
             holder_fb = plan.holder.social_auth.filter(provider = 'facebook').first()
             holder_fb_id = holder_fb.uid
-            picture_url = get_picture_url(holder_fb_id)
+            picture_url = facebook_proxy.get_picture_url(holder_fb_id)
             
         if pm.viewable(user,plan):
             template = loader.get_template('travelplans/plan_detail.html')
-            friend_list = all_friends_names(user)
+            friend_list = facebook_proxy.all_friends_names(user)
             context = RequestContext(request, {
             'plan': plan,
             'editable':pm.editable(user,plan),
@@ -106,6 +106,7 @@ def view_plan_detail(request,planid):
         print str(e)
         # logout(request)
         return render_to_response('travelplans/error.html',{'error_message': str(e)})  
+        
 def help(request):
     try:
         template = loader.get_template('travelplans/help.html')
